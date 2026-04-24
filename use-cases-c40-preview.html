@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Use Cases — Urban Web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--blue:#0078CE;--dark:#07111e;--font-display:'Barlow Condensed',sans-serif;--font:'DM Sans',sans-serif;--max:1200px;}
+    body{font-family:var(--font);background:#fff;color:#111;overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:300;height:72px;display:flex;align-items:center;padding:0 48px;background:var(--dark);border-top:3px solid var(--blue);}
+    .nav-inner{max-width:var(--max);width:100%;margin:0 auto;display:flex;align-items:center;}
+    .nav-logo img{height:90px;filter:brightness(0) invert(1);}
+    .nav-links{display:flex;gap:28px;margin-left:auto;align-items:center;}
+    .nav-link{font-size:13px;color:rgba(255,255,255,0.5);letter-spacing:0.02em;transition:color 0.15s;}
+    .nav-link:hover,.nav-link.active{color:#fff;}
+    .btn-nav{border:1px solid rgba(255,255,255,0.28);color:#fff;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:8px 20px;margin-left:16px;transition:background 0.15s,border-color 0.15s;}
+    .btn-nav:hover{background:var(--blue);border-color:var(--blue);}
+
+    /* PAGE HEADER */
+    .page-header{padding:160px 48px 80px;background:var(--dark);border-bottom:1px solid rgba(255,255,255,0.06);}
+    .page-header-inner{max-width:var(--max);margin:0 auto;}
+    .eyebrow{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);margin-bottom:20px;display:block;}
+    .page-header h1{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(52px,8vw,104px);line-height:0.9;color:#fff;margin-bottom:22px;max-width:860px;}
+    .page-header p{font-size:17px;font-weight:300;color:rgba(255,255,255,0.48);max-width:500px;line-height:1.65;}
+
+    /* INTRO STRIP */
+    .intro-strip{background:#fff;border-bottom:1px solid rgba(0,0,0,0.08);padding:36px 48px;}
+    .intro-strip-inner{max-width:var(--max);margin:0 auto;}
+    .intro-strip p{font-size:15px;font-weight:300;color:#555;line-height:1.75;max-width:760px;}
+    .intro-strip strong{color:#111;font-weight:500;}
+
+    /* ── EDITORIAL SECTIONS ── */
+    .use-cases-section{background:#fff;}
+    .uc-section{border-bottom:1px solid rgba(0,0,0,0.09);}
+
+    .uc-hdr{cursor:pointer;padding:0 48px;transition:background 0.2s;display:block;}
+    .uc-hdr:hover{background:#fafaf9;}
+    .uc-section.open>.uc-hdr{background:#fafaf9;}
+
+    .uc-hdr-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:108px 1fr auto;gap:0 36px;align-items:center;padding:28px 0;min-height:108px;}
+
+    .uc-ghost-num{font-family:var(--font-display);font-weight:900;font-size:96px;line-height:1;color:rgba(0,0,0,0.05);letter-spacing:-0.02em;user-select:none;transition:color 0.3s,opacity 0.3s;}
+    .uc-section.open .uc-ghost-num{color:var(--uc-color,var(--blue));opacity:0.13;}
+
+    .uc-hdr-content{min-width:0;}
+    .uc-tag{font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--uc-color,var(--blue));margin-bottom:8px;display:block;}
+    .uc-title{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(36px,4.8vw,64px);line-height:0.92;color:#111;margin-bottom:10px;letter-spacing:-0.01em;}
+    .uc-summary{font-size:13px;font-weight:300;color:#888;max-width:440px;line-height:1.65;}
+
+    .uc-hdr-right{display:flex;flex-direction:column;align-items:flex-end;gap:14px;flex-shrink:0;}
+    .uc-scale{font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#c0c0c0;white-space:nowrap;}
+    .uc-toggle{width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(0,0,0,0.13);display:flex;align-items:center;justify-content:center;font-size:22px;line-height:1;color:rgba(0,0,0,0.25);transition:all 0.22s;user-select:none;}
+    .uc-section.open>.uc-hdr .uc-toggle{background:var(--uc-color,var(--blue));border-color:var(--uc-color,var(--blue));color:#fff;transform:rotate(45deg);}
+
+    /* PANEL */
+    .uc-panel{overflow:hidden;max-height:0;transition:max-height 0.52s cubic-bezier(0.4,0,0.2,1);}
+    .uc-panel.open{max-height:2200px;}
+    .uc-panel-body{border-top:1px solid rgba(0,0,0,0.07);background:#f7f7f6;padding:52px 48px 68px;}
+    .uc-panel-inner{max-width:var(--max);margin:0 auto;}
+
+    /* SUB-TABS */
+    .sub-tabs{display:flex;gap:0;border-bottom:1px solid rgba(0,0,0,0.1);margin-bottom:40px;}
+    .sub-tab{padding:10px 22px;font-family:var(--font);font-size:12px;font-weight:500;letter-spacing:0.04em;color:#aaa;background:transparent;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;transition:color 0.15s,border-color 0.15s;}
+    .sub-tab.active{color:#111;border-bottom-color:var(--uc-color,var(--blue));}
+    .sub-tab:hover:not(.active){color:#555;}
+
+    /* CONTENT GRID */
+    .uc-content-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+    .uc-scenario h3{font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:22px;color:#111;margin-bottom:20px;letter-spacing:0.01em;}
+    .uc-steps{display:flex;flex-direction:column;gap:0;}
+    .uc-step{display:flex;gap:20px;padding:15px 0;border-bottom:1px solid rgba(0,0,0,0.07);}
+    .uc-step:last-child{border-bottom:none;}
+    .uc-step-num{font-family:var(--font-display);font-weight:800;font-size:20px;color:var(--uc-color,var(--blue));min-width:26px;line-height:1.3;}
+    .uc-step-text{font-size:13px;font-weight:300;color:#444;line-height:1.75;}
+    .uc-step-text strong{color:#111;font-weight:500;}
+    .uc-outcome-block{margin-top:24px;background:#fff;border-left:3px solid var(--uc-color,var(--blue));padding:16px 18px;}
+    .uc-outcome-label{font-size:9px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--uc-color,var(--blue));margin-bottom:6px;}
+    .uc-outcome-block p{font-size:13px;font-weight:300;color:#555;line-height:1.65;}
+
+    /* ── DEMO STYLES ── */
+    .demo-wrap{background:var(--dark);border-radius:0;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 4px 28px rgba(0,0,0,0.24);}
+    .demo-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.07);}
+    .demo-hdr-lbl{font-size:10px;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;color:rgba(255,255,255,0.28);}
+    .demo-dots{display:flex;gap:5px;}
+    .demo-dot{width:6px;height:6px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.22);background:transparent;padding:0;cursor:pointer;transition:all 0.15s;}
+    .demo-dot.active{background:#0078CE;border-color:#0078CE;}
+    .demo-body{position:relative;overflow:hidden;height:320px;}
+    .demo-screen{position:absolute;inset:0;opacity:0;transition:opacity 0.25s;pointer-events:none;overflow-y:auto;}
+    .demo-screen.active{opacity:1;pointer-events:auto;}
+    .demo-ftr{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-top:1px solid rgba(255,255,255,0.07);}
+    .demo-step{font-size:11px;color:rgba(255,255,255,0.3);}
+    .d-prev,.d-next{font-size:12px;font-weight:500;padding:5px 14px;border-radius:3px;border:1.5px solid rgba(255,255,255,0.18);background:transparent;color:rgba(255,255,255,0.6);cursor:pointer;transition:all 0.15s;font-family:var(--font);}
+    .d-prev:disabled{opacity:0.28;cursor:not-allowed;}
+    .d-next{background:#0078CE;border-color:#0078CE;color:#fff;}
+    .d-next:disabled{opacity:0.5;cursor:not-allowed;}
+    .demo-phone-wrap{display:flex;justify-content:center;padding:16px;}
+    .demo-phone{max-width:230px;width:100%;background:#0d1a2a;border-radius:20px;padding:12px 6px;box-shadow:0 2px 12px rgba(0,0,0,0.4);}
+    .demo-phone-notch{width:52px;height:9px;background:#1a2a3a;border-radius:20px;margin:0 auto 8px;}
+    .demo-phone-screen{background:#fff;border-radius:10px;overflow:hidden;min-height:300px;}
+    .demo-split{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px;min-height:280px;}
+    .demo-pane{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;}
+    .demo-pane-label{font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.28);padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.07);flex-shrink:0;}
+    .demo-pane-content{padding:10px 12px;flex:1;overflow-y:auto;}
+    .demo-map-toggle{display:flex;gap:0;}
+    .demo-toggle-btn{padding:4px 14px;font-size:11px;font-weight:500;background:transparent;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.5);cursor:pointer;transition:all 0.15s;font-family:var(--font);}
+    .demo-toggle-btn:first-child{border-radius:3px 0 0 3px;}
+    .demo-toggle-btn:last-child{border-radius:0 3px 3px 0;border-left:none;}
+    .demo-toggle-btn.active{background:#A0521A;border-color:#A0521A;color:#fff;}
+    .demo-map-wrap{padding:12px;display:flex;flex-direction:column;gap:10px;}
+    canvas.parking-canvas{display:block;width:100%;height:190px;border-radius:4px;}
+    .demo-map-stats{display:flex;gap:8px;}
+    .map-stat{flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:3px;padding:8px 10px;text-align:center;}
+    .map-stat-num{font-size:20px;font-weight:700;line-height:1;margin-bottom:3px;transition:color 0.4s;}
+    .map-stat-lbl{font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.35);}
+
+    /* PARTNERS */
+    .partners{background:#fff;padding:96px 0;border-top:3px solid var(--blue);}
+    .partners-inner{max-width:var(--max);margin:0 auto;padding:0 48px;}
+    .partners-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);margin-bottom:44px;display:block;}
+    .partners-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+    .partner-block{border-top:2px solid #111;padding-top:24px;}
+    .partner-logo{height:40px;width:auto;object-fit:contain;object-position:left;margin-bottom:18px;filter:brightness(0);opacity:0.72;transition:opacity 0.2s;}
+    .partner-block p{font-size:14px;font-weight:300;color:#555;line-height:1.8;}
+
+    /* CONTACT */
+    .contact{background:var(--dark);padding:100px 0;}
+    .contact-inner{max-width:var(--max);margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+    .contact-text h2{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(40px,5vw,68px);line-height:0.92;color:#fff;margin-bottom:20px;}
+    .contact-text h2 em{font-style:italic;text-transform:none;color:rgba(255,255,255,0.38);}
+    .contact-text p{font-size:14px;font-weight:300;color:rgba(255,255,255,0.42);line-height:1.75;}
+    .contact-form{display:flex;flex-direction:column;gap:14px;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    .form-field{display:flex;flex-direction:column;gap:6px;}
+    .form-field label{font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.32);}
+    .form-field input,.form-field textarea{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:#fff;font-family:var(--font);font-size:14px;padding:11px 14px;outline:none;transition:border-color 0.15s;}
+    .form-field input:focus,.form-field textarea:focus{border-color:var(--blue);}
+    .form-field input::placeholder,.form-field textarea::placeholder{color:rgba(255,255,255,0.18);}
+    .form-field textarea{resize:vertical;}
+    .btn-submit{background:var(--blue);color:#fff;border:none;cursor:pointer;font-family:var(--font);font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:13px 28px;align-self:flex-start;transition:background 0.15s;}
+    .btn-submit:hover{background:#005fa8;}
+    .form-success{display:none;color:#fff;padding:40px 0;}
+    .success-check{font-size:40px;color:var(--blue);margin-bottom:10px;}
+
+    /* FOOTER */
+    .footer{background:#000;padding:48px 0 28px;}
+    .footer-inner{max-width:var(--max);margin:0 auto;padding:0 48px;display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:36px;}
+    .footer-brand{display:flex;flex-direction:column;align-items:flex-start;}
+    .footer-brand p{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-top:10px;margin-bottom:10px;}
+    .footer-partner-logos{display:flex;align-items:center;gap:16px;}
+    .footer-partner-logo{display:block;object-fit:contain;filter:brightness(0) invert(1);opacity:0.28;transition:opacity 0.2s;}
+    .footer-partner-logo:hover{opacity:0.55;}
+    .footer-partner-logo--nfh{height:16px;}.footer-partner-logo--wri{height:22px;}
+    .footer-nav{display:flex;flex-direction:column;gap:10px;align-items:flex-end;}
+    .footer-nav a{font-size:13px;color:rgba(255,255,255,0.25);transition:color 0.15s;}
+    .footer-nav a:hover{color:rgba(255,255,255,0.6);}
+    .footer-bottom{max-width:var(--max);margin:0 auto;padding:18px 48px 0;border-top:1px solid rgba(255,255,255,0.06);font-size:12px;color:rgba(255,255,255,0.15);}
+
+    @media(max-width:900px){
+      .nav{padding:0 24px;}.nav-links{display:none;}
+      .page-header{padding:120px 24px 56px;}
+      .intro-strip{padding:28px 24px;}
+      .uc-hdr{padding:0 24px;}
+      .uc-hdr-inner{grid-template-columns:64px 1fr auto;gap:0 20px;padding:20px 0;min-height:80px;}
+      .uc-ghost-num{font-size:56px;}
+      .uc-title{font-size:clamp(28px,7vw,44px);}
+      .uc-scale{display:none;}
+      .uc-panel-body{padding:32px 24px 48px;}
+      .uc-content-grid{grid-template-columns:1fr;gap:32px;}
+      .partners-inner,.contact-inner{padding:0 24px;}
+      .partners-grid,.contact-inner,.form-row{grid-template-columns:1fr;}
+      .footer-inner{padding:0 24px;flex-direction:column;gap:28px;}
+      .footer-nav{align-items:flex-start;}.footer-bottom{padding:18px 24px 0;}
+      .demo-split{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index-c40-preview.html" class="nav-logo"><img src="brand_assets/NEWNEWLOGO.png" alt="Urban Web"></a>
+      <div class="nav-links">
+        <a href="index-c40-preview.html" class="nav-link">Home</a>
+        <a href="urban-web-c40-preview.html" class="nav-link">What is Urban Web</a>
+        <a href="use-cases-c40-preview.html" class="nav-link active">Use Cases</a>
+      </div>
+      <a href="#contact" class="btn-nav">Get in touch</a>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-inner">
+      <span class="eyebrow">Use Cases</span>
+      <h1>How does a city connect to shape what comes next?</h1>
+      <p>Urban Web is the infrastructure of connection. These are the conditions it creates — at every scale of city life.</p>
+    </div>
+  </div>
+
+  <div class="intro-strip">
+    <div class="intro-strip-inner">
+      <p>Every city has different priorities. But the underlying opportunity is the same: <strong>when mobility services share a common open layer, the value they create compounds.</strong> Select any use case to explore what becomes possible.</p>
+    </div>
+  </div>
+
+  <section class="use-cases-section">
+
+    <!-- UC 1: The Individual -->
+    <div class="uc-section" data-uc="individual" style="--uc-color:#0078CE">
+      <div class="uc-hdr">
+        <div class="uc-hdr-inner">
+          <div class="uc-ghost-num">01</div>
+          <div class="uc-hdr-content">
+            <span class="uc-tag">Culture</span>
+            <div class="uc-title">The Individual</div>
+            <div class="uc-summary">When mobility is embedded in everyday culture, your city has the choice to move differently.</div>
+          </div>
+          <div class="uc-hdr-right">
+            <span class="uc-scale">Personal scale</span>
+            <div class="uc-toggle">+</div>
+          </div>
+        </div>
+      </div>
+      <div class="uc-panel" id="panel-individual">
+        <div class="uc-panel-body">
+          <div class="uc-panel-inner">
+            <div class="uc-content-grid">
+              <div class="uc-scenario">
+                <h3>A commuter's morning</h3>
+                <div class="uc-steps">
+                  <div class="uc-step"><div class="uc-step-num">01</div><div class="uc-step-text"><strong>One place to start.</strong> A commuter opens a single app — or asks an AI assistant — to plan their journey from home to office.</div></div>
+                  <div class="uc-step"><div class="uc-step-num">02</div><div class="uc-step-text"><strong>Any mode, any provider.</strong> The route combines a micro-mobility leg, a transit connection, and a ride-hail pickup — booked and paid for in one flow.</div></div>
+                  <div class="uc-step"><div class="uc-step-num">03</div><div class="uc-step-text"><strong>No friction, no switching.</strong> Every service is reachable because they all share the same open layer. The traveller never needs to know it exists.</div></div>
+                </div>
+                <div class="uc-outcome-block">
+                  <div class="uc-outcome-label">The shift</div>
+                  <p>Mobility becomes invisible — not because the services merged, but because the infrastructure beneath them is open. The city moves; the individual just moves with it.</p>
+                </div>
+              </div>
+              <div id="demo-individual"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UC 2: The Organisation -->
+    <div class="uc-section" data-uc="organisation" style="--uc-color:#2D6B4E">
+      <div class="uc-hdr">
+        <div class="uc-hdr-inner">
+          <div class="uc-ghost-num">02</div>
+          <div class="uc-hdr-content">
+            <span class="uc-tag">Climate action</span>
+            <div class="uc-title">The Organisation</div>
+            <div class="uc-summary">How one company's commute problem becomes every employer's enabler for climate action.</div>
+          </div>
+          <div class="uc-hdr-right">
+            <span class="uc-scale">Organisational scale</span>
+            <div class="uc-toggle">+</div>
+          </div>
+        </div>
+      </div>
+      <div class="uc-panel" id="panel-organisation">
+        <div class="uc-panel-body">
+          <div class="uc-panel-inner">
+            <div class="uc-content-grid">
+              <div class="uc-scenario">
+                <h3>An employer and their commuters</h3>
+                <div class="uc-steps">
+                  <div class="uc-step"><div class="uc-step-num">01</div><div class="uc-step-text"><strong>Mobility as a benefit.</strong> An employer offers a sustainable commuting allowance — spendable across any connected service, not locked to a single provider.</div></div>
+                  <div class="uc-step"><div class="uc-step-num">02</div><div class="uc-step-text"><strong>Real emissions data.</strong> Because Urban Web tracks the full journey — not just the segment — the employer sees actual carbon impact across all modes.</div></div>
+                  <div class="uc-step"><div class="uc-step-num">03</div><div class="uc-step-text"><strong>Collective reporting.</strong> Multiple employers in a district pool mobility data to demonstrate climate progress — without sharing individual user information.</div></div>
+                </div>
+                <div class="uc-outcome-block">
+                  <div class="uc-outcome-label">The shift</div>
+                  <p>Sustainability commitments become measurable because the data finally exists. Companies don't need to negotiate with individual providers — they connect once and see everything.</p>
+                </div>
+              </div>
+              <div id="demo-organisation"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UC 3: The Neighbourhood (sub-tabs: Space / Capacity) -->
+    <div class="uc-section" data-uc="neighbourhood" style="--uc-color:#A0521A">
+      <div class="uc-hdr">
+        <div class="uc-hdr-inner">
+          <div class="uc-ghost-num">03</div>
+          <div class="uc-hdr-content">
+            <span class="uc-tag">Businesses</span>
+            <div class="uc-title">The Neighbourhood</div>
+            <div class="uc-summary">What if the idle assets of your city were its next business opportunity?</div>
+          </div>
+          <div class="uc-hdr-right">
+            <span class="uc-scale">District scale</span>
+            <div class="uc-toggle">+</div>
+          </div>
+        </div>
+      </div>
+      <div class="uc-panel" id="panel-neighbourhood">
+        <div class="uc-panel-body">
+          <div class="uc-panel-inner">
+            <div class="sub-tabs">
+              <button class="sub-tab active" data-sub="space">Unlocking Space</button>
+              <button class="sub-tab" data-sub="capacity">Unlocking Capacity</button>
+            </div>
+            <div class="sub-panel" data-sub="space">
+              <div class="uc-content-grid">
+                <div class="uc-scenario">
+                  <h3>A district's idle parking</h3>
+                  <div class="uc-steps">
+                    <div class="uc-step"><div class="uc-step-num">01</div><div class="uc-step-text"><strong>Every space, connected.</strong> Parking operators, private car parks, and street bays all publish availability through the shared layer — in real time.</div></div>
+                    <div class="uc-step"><div class="uc-step-num">02</div><div class="uc-step-text"><strong>Dynamic use.</strong> A space empty on weekday mornings becomes a micro-mobility hub. A car park at night becomes an EV charging depot. The asset earns in all its idle hours.</div></div>
+                    <div class="uc-step"><div class="uc-step-num">03</div><div class="uc-step-text"><strong>Last-mile logic.</strong> Delivery services automatically route to available loading zones, reducing dwell time, emissions, and congestion across the district.</div></div>
+                  </div>
+                  <div class="uc-outcome-block">
+                    <div class="uc-outcome-label">The shift</div>
+                    <p>Fixed infrastructure becomes fluid. Assets that were single-purpose become multi-purpose — without new construction, just new connections.</p>
+                  </div>
+                </div>
+                <div id="demo-neighbourhood-space"></div>
+              </div>
+            </div>
+            <div class="sub-panel" data-sub="capacity" style="display:none">
+              <div class="uc-content-grid">
+                <div class="uc-scenario">
+                  <h3>Idle vehicles, active city</h3>
+                  <div class="uc-steps">
+                    <div class="uc-step"><div class="uc-step-num">01</div><div class="uc-step-text"><strong>Hidden capacity revealed.</strong> School buses, corporate coaches, and community vehicles sit idle for most of the day — invisible to the city's transit planners.</div></div>
+                    <div class="uc-step"><div class="uc-step-num">02</div><div class="uc-step-text"><strong>Listed once, available everywhere.</strong> Fleet owners publish their available windows to the shared layer. Any transit operator or city service can now discover and book them.</div></div>
+                    <div class="uc-step"><div class="uc-step-num">03</div><div class="uc-step-text"><strong>More routes, zero procurement.</strong> Route gaps close using vehicles that already exist. The city gains capacity without buying a single new vehicle.</div></div>
+                  </div>
+                  <div class="uc-outcome-block">
+                    <div class="uc-outcome-label">The shift</div>
+                    <p>Transit capacity is no longer limited by what the city owns. It's powered by what already exists — just newly connected.</p>
+                  </div>
+                </div>
+                <div id="demo-neighbourhood-capacity"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UC 4: The City (sub-tabs: Credentials / Energy) -->
+    <div class="uc-section" data-uc="city" style="--uc-color:#5B3FA8">
+      <div class="uc-hdr">
+        <div class="uc-hdr-inner">
+          <div class="uc-ghost-num">04</div>
+          <div class="uc-hdr-content">
+            <span class="uc-tag">Ideas</span>
+            <div class="uc-title">The City's Future</div>
+            <div class="uc-summary">What if your city never had to rebuild for what comes next?</div>
+          </div>
+          <div class="uc-hdr-right">
+            <span class="uc-scale">City scale</span>
+            <div class="uc-toggle">+</div>
+          </div>
+        </div>
+      </div>
+      <div class="uc-panel" id="panel-city">
+        <div class="uc-panel-body">
+          <div class="uc-panel-inner">
+            <div class="sub-tabs">
+              <button class="sub-tab active" data-sub="credentials">Portable Credentials</button>
+              <button class="sub-tab" data-sub="energy">Energy Transition</button>
+            </div>
+            <div class="sub-panel" data-sub="credentials">
+              <div class="uc-content-grid">
+                <div class="uc-scenario">
+                  <h3>A driver's record, everywhere</h3>
+                  <div class="uc-steps">
+                    <div class="uc-step"><div class="uc-step-num">01</div><div class="uc-step-text"><strong>Skills that travel.</strong> A transit driver's qualifications, certifications, and employment history are verified and stored on Urban Web — not with any single employer.</div></div>
+                    <div class="uc-step"><div class="uc-step-num">02</div><div class="uc-step-text"><strong>Instant discovery.</strong> When a driver changes operators or cities, their full record is available immediately. No certificates to chase. No delays in hiring.</div></div>
+                    <div class="uc-step"><div class="uc-step-num">03</div><div class="uc-step-text"><strong>Cities see the picture.</strong> Planners see aggregate workforce readiness in real time — EV certifications, gaps, training needs — before they become crises.</div></div>
+                  </div>
+                  <div class="uc-outcome-block">
+                    <div class="uc-outcome-label">The shift</div>
+                    <p>The workforce becomes visible. Cities that commit to electric fleets can now see whether the talent to drive them exists — and act before the vehicles arrive.</p>
+                  </div>
+                </div>
+                <div id="demo-city-credentials"></div>
+              </div>
+            </div>
+            <div class="sub-panel" data-sub="energy" style="display:none">
+              <div class="uc-content-grid">
+                <div class="uc-scenario">
+                  <h3>Mobility and energy as one system</h3>
+                  <div class="uc-steps">
+                    <div class="uc-step"><div class="uc-step-num">01</div><div class="uc-step-text"><strong>Every charger, discoverable.</strong> An EV driver finds, books, and pays at any charge point in the city — regardless of the operator — in a single standard interaction.</div></div>
+                    <div class="uc-step"><div class="uc-step-num">02</div><div class="uc-step-text"><strong>Buses on the grid.</strong> Electric bus fleets export energy overnight, stabilising the grid and generating income. The parked fleet becomes a city asset.</div></div>
+                    <div class="uc-step"><div class="uc-step-num">03</div><div class="uc-step-text"><strong>Infrastructure built on real data.</strong> City planners see where charging actually happens. Grid investment follows real demand, not estimates.</div></div>
+                  </div>
+                  <div class="uc-outcome-block">
+                    <div class="uc-outcome-label">The shift</div>
+                    <p>The infrastructure built for moving people becomes the infrastructure for moving energy. The city's transport network and energy network converge.</p>
+                  </div>
+                </div>
+                <div id="demo-city-energy"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="partners" id="partners">
+    <div class="partners-inner">
+      <span class="partners-eyebrow">A program by</span>
+      <div class="partners-grid">
+        <div class="partner-block">
+          <a href="https://networksforhumanity.org" target="_blank" rel="noopener"><img src="brand_assets/NFH Logo.png" alt="Networks for Humanity" class="partner-logo"></a>
+          <p>Networks for Humanity (NFH) is a global non-profit initiative building open, interoperable and decentralised digital infrastructure. Their shared network powers Urban Web, providing the open standard that any mobility service can connect to.</p>
+        </div>
+        <div class="partner-block">
+          <a href="https://wri.org" target="_blank" rel="noopener"><img src="brand_assets/World_Resources_Institute_logo.svg.png" alt="World Resources Institute" class="partner-logo"></a>
+          <p>WRI is a global research organisation working to improve people's lives, protect nature and stabilise the climate. They bring city relationships, policy expertise, and on-the-ground research that makes Urban Web work in practice.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <div class="contact-text">
+        <span class="eyebrow">The invitation</span>
+        <h2>The cities that move first shape what comes next.<br><em>The rest inherit what they build.</em></h2>
+        <p>We're speaking with city officials, transport authorities, and urban policy leaders who want to explore what this could mean for their city.</p>
+      </div>
+      <div>
+        <form id="contactForm" class="contact-form">
+          <div class="form-row">
+            <div class="form-field"><label>Your name</label><input type="text" name="name" placeholder="Name" required></div>
+            <div class="form-field"><label>City or organisation</label><input type="text" name="org" placeholder="e.g. City Transport Authority" required></div>
+          </div>
+          <div class="form-field"><label>Email</label><input type="email" name="email" placeholder="your@email.com" required></div>
+          <div class="form-field"><label>What matters most to your city?</label><textarea name="message" placeholder="Tell us briefly…" rows="4"></textarea></div>
+          <button type="submit" class="btn-submit">Send →</button>
+        </form>
+        <div class="form-success" id="formSuccess"><div class="success-check">✓</div><h3 style="color:#fff;margin-bottom:8px">Thank you</h3><p style="color:rgba(255,255,255,0.45)">We'll be in touch.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="brand_assets/NEWNEWLOGO.png" alt="Urban Web" height="136" style="filter:brightness(0) invert(1);opacity:0.35;margin-left:-22px;">
+        <p>A program by</p>
+        <div class="footer-partner-logos">
+          <a href="https://networksforhumanity.org" target="_blank" rel="noopener"><img src="brand_assets/NFH Logo.png" alt="NFH" class="footer-partner-logo footer-partner-logo--nfh"></a>
+          <a href="https://wri.org" target="_blank" rel="noopener"><img src="brand_assets/World_Resources_Institute_logo.svg.png" alt="WRI" class="footer-partner-logo footer-partner-logo--wri"></a>
+        </div>
+      </div>
+      <nav class="footer-nav">
+        <a href="index-c40-preview.html">Home</a>
+        <a href="urban-web-c40-preview.html">What is Urban Web</a>
+        <a href="use-cases-c40-preview.html">Use Cases</a>
+        <a href="#contact">Get in touch</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">© 2025 Urban Web Program</div>
+  </footer>
+
+  <script>
+  /* ── CONTACT FORM ── */
+  (function(){
+    const form=document.getElementById('contactForm'),success=document.getElementById('formSuccess');
+    if(!form||!success)return;
+    form.addEventListener('submit',e=>{e.preventDefault();form.style.display='none';success.style.display='block';});
+  })();
+
+  /* ── COLOURS ── */
+  const C={blue:'#0078CE',green:'#2D6B4E',amber:'#A0521A',purple:'#5B3FA8',teal:'#1B6B7A',text:'#1C2B30',t2:'#4E6268',t3:'#8FA5AB',surf:'#F0F2F5',bd:'rgba(28,43,48,0.10)'};
+
+  /* ── HTML HELPERS ── */
+  const hdr=t=>`<div style="background:${C.surf};padding:9px 12px;border-bottom:1px solid ${C.bd}"><div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:${C.t3}">${t}</div></div>`;
+  const body=c=>`<div style="padding:11px;display:flex;flex-direction:column;gap:8px">${c}</div>`;
+  const card=(c,col)=>`<div style="background:${col}0d;border:1px solid ${col}2a;border-radius:3px;padding:10px 11px;display:flex;flex-direction:column;gap:5px">${c}</div>`;
+  const row=(k,v,vc)=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;border-bottom:1px solid ${C.bd};font-size:11px"><span style="color:${C.t3}">${k}</span><span style="font-weight:600;color:${vc||C.text}">${v}</span></div>`;
+  const btn=(l,col)=>`<div style="background:${col};color:#fff;text-align:center;padding:7px 0;border-radius:3px;font-size:11px;font-weight:600;margin-top:4px">${l}</div>`;
+  const chk=(t,col)=>`<div style="display:flex;align-items:center;gap:7px;padding:3px 0"><div style="width:5px;height:5px;border-radius:50%;background:${col};flex-shrink:0"></div><span style="font-size:11px;color:${C.text}">${t}</span></div>`;
+  const lbl=(t,col)=>`<div style="font-size:9px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:${col||C.t3};margin-bottom:3px">${t}</div>`;
+  const dPaneTxt=(col,items)=>`<div style="display:flex;flex-direction:column;gap:6px;color:rgba(255,255,255,0.7);font-size:12px">${items.map(i=>`<div style="padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.07);line-height:1.5">${i}</div>`).join('')}</div>`;
+  const sph={
+    lbl:t=>`<div style="font-size:9px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:rgba(255,255,255,0.38);margin-bottom:5px">${t}</div>`,
+    row:(k,v,vc)=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.07);font-size:11px"><span style="color:rgba(255,255,255,0.48)">${k}</span><span style="font-weight:600;color:${vc||'rgba(255,255,255,0.88)'}">${v}</span></div>`,
+    note:t=>`<div style="font-size:10px;color:rgba(255,255,255,0.42);line-height:1.55;margin-top:6px">${t}</div>`,
+    pill:(l,c)=>`<span style="background:${c}28;color:${c};border:1px solid ${c}50;font-size:9px;font-weight:700;text-transform:uppercase;padding:2px 7px;border-radius:2px;letter-spacing:0.06em;display:inline-block;margin:1px">${l}</span>`,
+  };
+
+  /* ── SCREENS DATA ── */
+  const SCREENS={
+    /* Individual — phone, 3 screens */
+    individual:[
+      hdr('Jazzfest 2025 · Powerhouse Arena')+body(
+        card(lbl('Your event ticket')+`<div style="font-size:12px;font-weight:600;color:${C.text}">Jazzfest Night 2 — Section C</div><div style="font-size:11px;color:${C.blue};font-weight:600">20:00 · Powerhouse Arena, North Gate</div>`,C.blue)+
+        card(lbl('How are you getting there?')+`<div style="font-size:11px;color:${C.t2};line-height:1.55;margin-bottom:5px">Journey options from every operator in your city are ready.</div><div style="font-size:12px;font-weight:600;color:${C.blue}">See journey options →</div>`,C.blue)
+      ),
+      hdr('Getting to Powerhouse Arena · 20:00')+body(
+        `<div style="font-size:9px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:${C.t3}">Best options tonight</div>`+
+        card(`<div style="display:flex;justify-content:space-between;margin-bottom:7px"><div style="font-size:10px;font-weight:600;color:${C.blue}">Recommended · 38 min</div><div style="font-size:14px;font-weight:700;color:${C.text}">€2.40</div></div><div style="display:flex;flex-direction:column;gap:4px;margin-bottom:8px"><div style="display:flex;align-items:center;gap:6px"><span style="background:${C.blue};color:#fff;padding:1px 6px;font-size:8px;font-weight:700;border-radius:2px">M3</span><span style="font-size:11px;color:${C.text}">Metro · Central → Arena · 6 stops</span></div></div>`+btn('Book this journey',C.blue),C.blue)+
+        `<div style="font-size:10px;color:${C.t3};text-align:center;margin-top:4px">Options from Metro, CityBus and 3 others</div>`
+      ),
+      hdr('✓ You\'re all set')+body(
+        card(lbl('Event ticket')+`<div style="font-size:12px;font-weight:600;color:${C.text}">Jazzfest Night 2 · Section C</div><div style="font-size:11px;color:${C.t3}">Fri 14 Nov · 20:00</div>`,C.blue)+
+        card(lbl('Transit ticket',C.green)+`<div style="font-size:12px;font-weight:600;color:${C.text}">Metro M3 · 2 trips</div><div style="font-size:11px;color:${C.green};font-weight:600">Departs 19:14 · Arrives 19:52</div>`,C.green)+
+        chk('Departure reminder set · 19:05',C.green)+
+        `<div style="font-size:11px;color:${C.t3};text-align:center;line-height:1.7;margin-top:4px">One checkout. Two tickets.<br>No separate app. No extra step.</div>`
+      ),
+    ],
+
+    /* Organisation — split, 3 steps */
+    organisation:[
+      {left:{lbl:'City Transport Authority',items:[sph.lbl('Modal shift target')+sph.row('2030 goal','35% on public transit')+sph.row('Current measurement','Unknown','#ff6b6b'),sph.note('Best available data: an annual survey. Most commute trips are invisible.')]},right:{lbl:'Employer — Meridian Group',items:[sph.lbl('ESG Commuting Report')+sph.row('Data quality','Estimated only','#D4782A')+sph.row('On transit (est.)','41%')+sph.row('Confidence','Low — survey based','#ff6b6b'),sph.note('No standard way to verify a single trip. Every operator uses a different format.')]}},
+      {left:{lbl:'Employer — Meridian Group',items:[sph.lbl('Green commute policy')+'<div style="margin:4px 0">'+sph.pill('Metro',C.blue)+sph.pill('Bus',C.blue)+sph.pill('Cycle',C.green)+'</div>'+sph.row('Reward','£1.20 / km')+sph.row('Applies to','All operators automatically'),sph.note('Published once. Every transit operator in the city picks it up automatically.')]},right:{lbl:'Any transit operator',items:[sph.lbl('Received from Urban Web')+sph.row('Policy source','Meridian Group')+sph.row('Status','Active — auto-enforced','#2A9E72')+sph.row('Operators covered','All (14 in city)'),sph.note('No bilateral agreement. No custom integration. One standard.')]}},
+      {left:{lbl:'Employee trip — live',items:[sph.lbl('Verified commute')+sph.row('Mode','Bus 47 · 6.1 km')+sph.row('Employer','Meridian Group')+sph.row('Credit awarded','£7.32','#2A9E72')+sph.row('Carbon offset','1.4 kg CO₂','#2A9E72')]},right:{lbl:'City Transport Authority',items:[sph.lbl('Modal shift — now visible')+sph.row('On public transit','48%','#2A9E72')+sph.row('Data quality','Verified trips')+sph.row('Employers reporting','312'),sph.note('Real evidence base. Built from trips, not surveys.')]}},
+    ],
+
+    /* Neighbourhood space — handled by parking canvas */
+
+    /* Unlocking Capacity — phone, 4 screens */
+    capacity:[
+      hdr('City fleet inventory')+body(
+        `<div style="font-size:9px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:${C.t3};margin-bottom:6px">Idle assets — today</div>`+
+        card(`${lbl('School buses · 23 vehicles')}${row('Active window','07:00 – 09:00, 15:00 – 17:00')}${row('Idle','09:00 – 14:30',C.amber)}${row('Visible to city','No','#C0392B')}`,C.amber)+
+        card(`${lbl('Corporate coaches · 8 vehicles')}${row('Idle window','Weekends + evenings')}${row('Visible to city','No','#C0392B')}`,C.amber)+
+        `<div style="font-size:10px;color:${C.t3};line-height:1.55;margin-top:4px">31 vehicles. Paid for. Invisible to the city and its residents.</div>`
+      ),
+      hdr('Joining Urban Web')+body(
+        card(`${lbl('School bus fleet — now connected')}${row('Connection','Urban Web standard')}${row('Availability published','09:00 – 14:30 daily')}${row('Visible to','Any operator or platform')}`,C.green)+
+        chk('Joined once — no bilateral agreements',C.green)+
+        chk('Any operator can discover and book',C.green)+
+        chk('Revenue generated during idle hours',C.green)+
+        `<div style="font-size:10px;color:${C.green};line-height:1.55;margin-top:4px">One connection. City-wide discoverability. No integration work.</div>`
+      ),
+      hdr('Demand matched')+body(
+        card(`${lbl('Transit operator request')}${row('Route gap','Central → Tech Park · 09:15–11:00')}${row('Capacity needed','28 seats')}${row('Found via Urban Web','School bus fleet',C.green)}${row('Booked in','< 4 minutes',C.green)}`,C.green)+
+        btn('Capacity confirmed',C.green)+
+        `<div style="font-size:10px;color:${C.t3};line-height:1.55;margin-top:6px">No new vehicle. No procurement. No contract negotiation.</div>`
+      ),
+      hdr('City mobility expanded')+body(
+        `<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">`+
+        `<div style="background:${C.green}0d;border:1px solid ${C.green}2a;border-radius:3px;padding:10px;text-align:center"><div style="font-size:20px;font-weight:700;color:${C.green}">0</div><div style="font-size:9px;text-transform:uppercase;color:${C.t3};letter-spacing:0.07em">New vehicles</div></div>`+
+        `<div style="background:${C.green}0d;border:1px solid ${C.green}2a;border-radius:3px;padding:10px;text-align:center"><div style="font-size:20px;font-weight:700;color:${C.green}">31</div><div style="font-size:9px;text-transform:uppercase;color:${C.t3};letter-spacing:0.07em">New routes</div></div></div>`+
+        `<div style="font-size:11px;color:${C.t2};line-height:1.65">First and last mile gaps closed using assets the city already owned. The city gains transit capacity without procurement.</div>`
+      ),
+    ],
+
+    /* Portable Credentials — phone, 3 screens */
+    transition:[
+      hdr('Driver profile · Marcus B.')+body(
+        card(`${lbl('Verified credentials')}${chk('Class D Commercial licence — verified',C.green)}${chk('EV Level 2 certification — 2024',C.green)}${chk('Defensive driving — 5 yrs',C.green)}`,C.green)+
+        card(`${lbl('Employment history')}${row('CityLine Transit','2019 – 2023')}${row('MetroBus Co','2023 – present')}`,C.t2)+
+        `<div style="font-size:10px;color:${C.t3};line-height:1.55;margin-top:4px">All records verified on Urban Web. Portable across every employer in every city.</div>`
+      ),
+      hdr('Changing employer')+body(
+        card(`${lbl('Record transfer')}${row('From','MetroBus Co')}${row('To','GreenFleet Transit')}${row('Status','Instant — no paperwork',C.green)}${row('Credentials','All verified, all portable')}`,C.green)+
+        chk('No certificates to chase',C.green)+
+        chk('No gaps in employment history',C.green)+
+        chk('EV certification visible immediately',C.green)+
+        `<div style="font-size:10px;color:${C.green};line-height:1.55;margin-top:4px">The record travels with the driver. Not with the employer.</div>`
+      ),
+      hdr('City skills dashboard')+body(
+        `<div style="font-size:9px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:${C.t3};margin-bottom:6px">EV workforce readiness</div>`+
+        card(`${row('EV certified drivers','2,840',C.green)}${row('EV fleet target by 2027','4,200')}${row('Skills gap','1,360 drivers',C.amber)}${row('Training institutes linked','14')}`,C.purple)+
+        `<div style="font-size:10px;color:${C.t3};line-height:1.55;margin-top:4px">The city sees its workforce gap before it becomes a crisis — not after.</div>`
+      ),
+    ],
+
+    /* Energy Transition — split, 3 steps */
+    energy:[
+      {left:{lbl:'EV driver · Any charger',items:[sph.lbl('Charging session')+sph.row('Charger network','GridPower (any network)')+sph.row('Energy delivered','28.4 kWh')+sph.row('Settled automatically','£6.20','#2A9E72'),sph.note('Any charger. Any network. One standard. No account required at each provider.')]},right:{lbl:'Charge point operator',items:[sph.lbl('Session logged')+sph.row('Verified energy','28.4 kWh')+sph.row('Driver','Anonymous — privacy preserved')+sph.row('Revenue','Settled within seconds','#2A9E72'),sph.note('No custom billing integration. Settlement is automatic via the open standard.')]}},
+      {left:{lbl:'Electric bus fleet · Overnight',items:[sph.lbl('Vehicle-to-grid export')+sph.row('Fleet size','42 buses')+sph.row('Grid export window','23:00 – 05:00')+sph.row('Energy exported','1,240 kWh')+sph.row('Revenue generated','£186','#2A9E72')]},right:{lbl:'City grid operator',items:[sph.lbl('Peak demand managed')+sph.row('Buses contributing','42 / 42')+sph.row('Grid stress avoided','Yes','#2A9E72')+sph.row('Peaker plant avoided','Yes','#2A9E72'),sph.note('The fleet stabilises the grid and generates income while parked.')]}},
+      {left:{lbl:'City energy authority',items:[sph.lbl('Investment guided by real data')+sph.row('Chargers needed: East','42 (actual usage)')+sph.row('Chargers needed: West','18 (actual usage)')+sph.row('Estimated (old method)','60 (both areas)'),sph.note('Infrastructure built where it\'s actually needed. Not where demand was estimated.')]},right:{lbl:'Solar building · Office park',items:[sph.lbl('Energy export')+sph.row('Solar generated','340 kWh today')+sph.row('Consumed on-site','180 kWh')+sph.row('Exported to grid','160 kWh','#2A9E72')+sph.row('Revenue','£28.80','#2A9E72')]}},
+    ],
+  };
+
+  /* ── DEMO RENDER ── */
+  function demoWrap(innerHTML,n,color,label){
+    const dots=Array.from({length:n},(_,i)=>`<button class="demo-dot${i===0?' active':''}" data-i="${i}" style="${i===0?`background:${color};border-color:${color}`:''}"></button>`).join('');
+    return `<div class="demo-wrap"><div class="demo-hdr"><span class="demo-hdr-lbl">${label||'See how it works'}</span><div class="demo-dots">${dots}</div></div><div class="demo-body">${innerHTML}</div>${n>1?`<div class="demo-ftr"><button class="d-prev" disabled>← Back</button><span class="demo-step">1 / ${n}</span><button class="d-next" style="background:${color};border-color:${color}">Next →</button></div>`:''}</div>`;
+  }
+
+  function renderPhone(key,color,label){
+    const screens=SCREENS[key];
+    if(!screens)return '';
+    const divs=screens.map((s,i)=>`<div class="demo-screen${i===0?' active':''}" data-s="${i}"><div class="demo-phone-wrap"><div class="demo-phone"><div class="demo-phone-notch"></div><div class="demo-phone-screen">${s}</div></div></div></div>`).join('');
+    return demoWrap(divs,screens.length,color,label);
+  }
+
+  function renderSplit(key,color,label){
+    const steps=SCREENS[key];
+    if(!steps)return '';
+    const divs=steps.map((s,i)=>{
+      const lc=`<div class="demo-pane"><div class="demo-pane-label">${s.left.lbl}</div><div class="demo-pane-content">${dPaneTxt(color,s.left.items)}</div></div>`;
+      const rc=`<div class="demo-pane"><div class="demo-pane-label">${s.right.lbl}</div><div class="demo-pane-content">${dPaneTxt(color,s.right.items)}</div></div>`;
+      return `<div class="demo-screen${i===0?' active':''}" data-s="${i}"><div class="demo-split">${lc}${rc}</div></div>`;
+    }).join('');
+    return demoWrap(divs,steps.length,color,label);
+  }
+
+  function renderParking(color){
+    return `<div class="demo-wrap"><div class="demo-hdr"><span class="demo-hdr-lbl">See the difference</span><div class="demo-map-toggle"><button class="demo-toggle-btn active" data-state="today">Today</button><button class="demo-toggle-btn" data-state="connected">Connected</button></div></div><div class="demo-body"><div class="demo-map-wrap"><div class="demo-map-stats"><div class="map-stat"><div class="map-stat-num" id="mapLoc" style="color:${color}">6</div><div class="map-stat-lbl">Locations</div></div><div class="map-stat"><div class="map-stat-num" id="mapSpaces" style="color:${color}">46</div><div class="map-stat-lbl">Spaces bookable</div></div><div class="map-stat" style="flex:2"><div id="mapMsg" style="font-size:11px;color:rgba(255,255,255,0.45);line-height:1.5;margin-top:6px">Most supply is invisible to drivers today.</div></div></div><canvas class="parking-canvas" id="parkingCanvas"></canvas><div style="display:flex;gap:12px;flex-wrap:wrap"><span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.4)"><span style="width:7px;height:7px;border-radius:50%;background:#2A8FE0;display:inline-block"></span>Municipal</span><span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.4)"><span style="width:7px;height:7px;border-radius:50%;background:#D4782A;display:inline-block"></span>Private</span><span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.4)"><span style="width:7px;height:7px;border-radius:50%;background:#C0392B;display:inline-block"></span>Hospital</span><span style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.4)"><span style="width:7px;height:7px;border-radius:50%;background:#2A9E72;display:inline-block"></span>EV</span></div></div></div></div>`;
+  }
+
+  /* ── DEMO NAV (with stopPropagation) ── */
+  function initDemoNavs(root){
+    root.querySelectorAll('.demo-wrap').forEach(wrap=>{
+      const screens=wrap.querySelectorAll('.demo-screen');
+      const dots=wrap.querySelectorAll('.demo-dot');
+      const prev=wrap.querySelector('.d-prev');
+      const next=wrap.querySelector('.d-next');
+      const stepEl=wrap.querySelector('.demo-step');
+      let cur=0;
+      function go(i){
+        screens[cur].classList.remove('active');dots[cur].classList.remove('active');
+        dots[cur].style.background='';dots[cur].style.borderColor='';
+        cur=Math.max(0,Math.min(i,screens.length-1));
+        screens[cur].classList.add('active');dots[cur].classList.add('active');
+        const col=next?next.style.background:'#0078CE';
+        dots[cur].style.background=col;dots[cur].style.borderColor=col;
+        if(stepEl)stepEl.textContent=`${cur+1} / ${screens.length}`;
+        if(prev)prev.disabled=cur===0;
+        if(next)next.disabled=cur===screens.length-1;
+      }
+      if(prev)prev.addEventListener('click',e=>{e.stopPropagation();go(cur-1);});
+      if(next)next.addEventListener('click',e=>{e.stopPropagation();go(cur+1);});
+      dots.forEach((d,i)=>d.addEventListener('click',e=>{e.stopPropagation();go(i);}));
+    });
+  }
+
+  /* ── PARKING CANVAS ── */
+  const SPOTS_TODAY=[{x:.15,y:.22,type:'muni'},{x:.42,y:.18,type:'muni'},{x:.70,y:.28,type:'muni'},{x:.25,y:.62,type:'muni'},{x:.55,y:.72,type:'muni'},{x:.80,y:.58,type:'muni'}];
+  const SPOTS_CONNECTED=[...SPOTS_TODAY,{x:.34,y:.38,type:'office'},{x:.62,y:.45,type:'office'},{x:.18,y:.80,type:'office'},{x:.50,y:.32,type:'hospital'},{x:.78,y:.76,type:'hospital'},{x:.88,y:.38,type:'ev'},{x:.08,y:.50,type:'ev'},{x:.45,y:.85,type:'ev'},{x:.30,y:.52,type:'hotel'},{x:.72,y:.18,type:'hotel'},{x:.10,y:.25,type:'muni'},{x:.90,y:.65,type:'muni'},{x:.58,y:.60,type:'office'},{x:.22,y:.40,type:'ev'}];
+  const SPOT_COLORS={muni:'#2A8FE0',office:'#D4782A',hospital:'#C0392B',ev:'#2A9E72',hotel:'#7B60D0'};
+  let parkingState='today',parkingRaf=null,parkingRevealT=0;
+
+  function initParkingCanvas(){
+    const canvas=document.getElementById('parkingCanvas');
+    if(!canvas)return;
+    const ctx=canvas.getContext('2d');
+    const dpr=Math.min(window.devicePixelRatio||1,2);
+    const w=canvas.offsetWidth,h=canvas.offsetHeight;
+    canvas.width=w*dpr;canvas.height=h*dpr;ctx.scale(dpr,dpr);
+    function drawGrid(){ctx.fillStyle='#0d1a2a';ctx.fillRect(0,0,w,h);ctx.fillStyle='rgba(255,255,255,0.04)';const bw=w/7,bh=h/5;for(let r=0;r<5;r++)for(let c=0;c<7;c++){const bx=c*bw+bw*.1,by=r*bh+bh*.1,bW=bw*.7,bH=bh*.7;if((r+c)%3!==0)ctx.fillRect(bx,by,bW,bH);}}
+    function drawSpots(spots,alphas){spots.forEach((s,i)=>{const a=alphas?alphas[i]:1;if(a<=0)return;const nx=s.x*w,ny=s.y*h,col=SPOT_COLORS[s.type];ctx.save();ctx.globalAlpha=a;ctx.shadowColor=col;ctx.shadowBlur=12;ctx.fillStyle=col;ctx.beginPath();ctx.arc(nx,ny,5,0,Math.PI*2);ctx.fill();ctx.restore();ctx.save();ctx.globalAlpha=a*0.2;ctx.strokeStyle=col;ctx.lineWidth=1;ctx.beginPath();ctx.arc(nx,ny,9,0,Math.PI*2);ctx.stroke();ctx.restore();});}
+    function render(){ctx.clearRect(0,0,w,h);drawGrid();if(parkingState==='today'){drawSpots(SPOTS_TODAY,null);}else{parkingRevealT=Math.min(parkingRevealT+0.025,1);const alphas=SPOTS_CONNECTED.map((_,i)=>{if(i<SPOTS_TODAY.length)return 1;const delay=(i-SPOTS_TODAY.length)/(SPOTS_CONNECTED.length-SPOTS_TODAY.length);return Math.max(0,Math.min((parkingRevealT-delay*0.6)/0.4,1));});drawSpots(SPOTS_CONNECTED,alphas);}parkingRaf=requestAnimationFrame(render);}
+    if(parkingRaf)cancelAnimationFrame(parkingRaf);render();
+
+    /* Toggle buttons — stopPropagation to avoid closing section */
+    document.querySelectorAll('.demo-toggle-btn').forEach(b=>{
+      b.addEventListener('click',e=>{
+        e.stopPropagation();
+        document.querySelectorAll('.demo-toggle-btn').forEach(x=>x.classList.remove('active'));
+        b.classList.add('active');parkingState=b.dataset.state;
+        if(parkingState==='connected')parkingRevealT=0;
+        const loc=document.getElementById('mapLoc'),sp=document.getElementById('mapSpaces'),msg=document.getElementById('mapMsg');
+        if(parkingState==='today'){if(loc){loc.textContent='6';loc.style.color=C.amber;}if(sp){sp.textContent='46';sp.style.color=C.amber;}if(msg)msg.textContent='Most supply is invisible to drivers today.';}
+        else{if(loc){loc.textContent='22';loc.style.color=C.green;}if(sp){sp.textContent='400+';sp.style.color=C.green;}if(msg)msg.textContent='Every space in the city — discoverable and bookable.';}
+      });
+    });
+  }
+
+  /* ── DEMO INIT PER SECTION ── */
+  function initDemosFor(id,section){
+    if(id==='individual'){
+      const c=section.querySelector('#demo-individual');
+      if(c){c.innerHTML=renderPhone('individual',C.blue,'See how it works');initDemoNavs(c);}
+    } else if(id==='organisation'){
+      const c=section.querySelector('#demo-organisation');
+      if(c){c.innerHTML=renderSplit('organisation',C.green,'Follow the journey');initDemoNavs(c);}
+    } else if(id==='neighbourhood'){
+      /* Init both sub-demos upfront */
+      const cSpace=section.querySelector('#demo-neighbourhood-space');
+      if(cSpace){cSpace.innerHTML=renderParking(C.amber);}
+      const cCap=section.querySelector('#demo-neighbourhood-capacity');
+      if(cCap){cCap.innerHTML=renderPhone('capacity',C.amber,'Capacity without procurement');initDemoNavs(cCap);}
+      /* Parking canvas needs visible DOM — init after paint */
+      setTimeout(initParkingCanvas,80);
+      /* Sub-tab switching */
+      section.querySelectorAll('.sub-tab').forEach(tab=>{
+        tab.addEventListener('click',e=>{
+          e.stopPropagation();
+          const sub=tab.dataset.sub;
+          section.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('active'));
+          tab.classList.add('active');
+          section.querySelectorAll('.sub-panel').forEach(p=>{p.style.display=p.dataset.sub===sub?'block':'none';});
+        });
+      });
+    } else if(id==='city'){
+      const cCred=section.querySelector('#demo-city-credentials');
+      if(cCred){cCred.innerHTML=renderPhone('transition',C.purple,'A credential that travels');initDemoNavs(cCred);}
+      const cEnergy=section.querySelector('#demo-city-energy');
+      if(cEnergy){cEnergy.innerHTML=renderSplit('energy',C.purple,'Energy and mobility connected');initDemoNavs(cEnergy);}
+      /* Sub-tab switching */
+      section.querySelectorAll('.sub-tab').forEach(tab=>{
+        tab.addEventListener('click',e=>{
+          e.stopPropagation();
+          const sub=tab.dataset.sub;
+          section.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('active'));
+          tab.classList.add('active');
+          section.querySelectorAll('.sub-panel').forEach(p=>{p.style.display=p.dataset.sub===sub?'block':'none';});
+        });
+      });
+    }
+  }
+
+  /* ── ACCORDION (click on .uc-hdr only) ── */
+  const demoInited={};
+  document.querySelectorAll('.uc-section').forEach(section=>{
+    const hdrEl=section.querySelector('.uc-hdr');
+    hdrEl.addEventListener('click',()=>{
+      const id=section.dataset.uc;
+      const panel=document.getElementById('panel-'+id);
+      const isOpen=section.classList.contains('open');
+      /* Close all */
+      document.querySelectorAll('.uc-section').forEach(s=>s.classList.remove('open'));
+      document.querySelectorAll('.uc-panel').forEach(p=>p.classList.remove('open'));
+      if(!isOpen){
+        section.classList.add('open');panel.classList.add('open');
+        if(!demoInited[id]){
+          demoInited[id]=true;
+          setTimeout(()=>initDemosFor(id,section),50);
+        }
+      }
+    });
+  });
+  </script>
+</body>
+</html>

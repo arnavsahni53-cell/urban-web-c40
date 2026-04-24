@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What is Urban Web — C40-Style Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --blue:#0078CE;--dark:#07111e;
+      --font-display:'Barlow Condensed',sans-serif;
+      --font:'DM Sans',sans-serif;--max:1200px;
+    }
+    body{font-family:var(--font);background:#fff;color:#111;overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:300;height:72px;display:flex;align-items:center;padding:0 48px;background:var(--dark);border-top:3px solid var(--blue);}
+    .nav-inner{max-width:var(--max);width:100%;margin:0 auto;display:flex;align-items:center;}
+    .nav-logo img{height:90px;filter:brightness(0) invert(1);}
+    .nav-links{display:flex;gap:28px;margin-left:auto;align-items:center;}
+    .nav-link{font-size:13px;color:rgba(255,255,255,0.5);letter-spacing:0.02em;transition:color 0.15s;}
+    .nav-link:hover,.nav-link.active{color:#fff;}
+    .btn-nav{border:1px solid rgba(255,255,255,0.28);color:#fff;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:8px 20px;margin-left:16px;transition:background 0.15s,border-color 0.15s;}
+    .btn-nav:hover{background:var(--blue);border-color:var(--blue);}
+
+    /* PAGE HEADER */
+    .page-header{padding:160px 48px 80px;background:var(--dark);border-bottom:1px solid rgba(255,255,255,0.06);}
+    .page-header-inner{max-width:var(--max);margin:0 auto;}
+    .eyebrow{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);margin-bottom:20px;display:block;}
+    .page-header h1{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(56px,8vw,108px);line-height:0.9;color:#fff;margin-bottom:24px;max-width:860px;}
+    .page-header p{font-size:18px;font-weight:300;color:rgba(255,255,255,0.5);max-width:520px;line-height:1.65;}
+
+    /* TAB NAV */
+    .tab-nav{position:sticky;top:72px;z-index:200;background:var(--dark);border-bottom:1px solid rgba(255,255,255,0.08);}
+    .tab-nav-inner{max-width:var(--max);margin:0 auto;padding:0 48px;display:flex;}
+    .tab-btn{background:none;border:none;cursor:pointer;font-family:var(--font);font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);padding:20px 0;margin-right:40px;border-bottom:2px solid transparent;transition:color 0.15s,border-color 0.15s;}
+    .tab-btn:hover{color:rgba(255,255,255,0.7);}
+    .tab-btn.active{color:#fff;border-bottom-color:var(--blue);}
+
+    /* TAB PANELS */
+    .tab-panel{display:none;} .tab-panel.active{display:block;}
+
+    /* WHAT TAB */
+    .what-section{background:#fff;padding:96px 0;}
+    .what-inner{max-width:var(--max);margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+    .section-heading{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(44px,6vw,80px);line-height:0.92;margin-bottom:24px;}
+    .what-text .section-heading{color:#111;}
+    .what-text p{font-size:15px;font-weight:300;color:#555;line-height:1.8;margin-bottom:18px;}
+    .what-standout{font-size:18px;color:#111;font-weight:500;border-left:2px solid var(--blue);padding-left:18px;margin:24px 0;}
+
+    /* Architecture diagram — CSS */
+    .arch-diagram{border:1px solid rgba(0,0,0,0.1);}
+    .arch-layer{padding:20px 24px;border-bottom:1px solid rgba(0,0,0,0.08);}
+    .arch-layer-label{font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#999;margin-bottom:10px;}
+    .arch-chips{display:flex;flex-wrap:wrap;gap:6px;}
+    .arch-chip{font-size:11px;color:#555;border:1px solid rgba(0,0,0,0.14);padding:4px 10px;letter-spacing:0.02em;}
+    .arch-chip.active{color:var(--blue);border-color:var(--blue);}
+    .arch-mid{background:var(--dark);padding:24px;display:flex;justify-content:space-between;align-items:center;}
+    .arch-mid-name{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:32px;color:#fff;letter-spacing:0.04em;}
+    .arch-mid-badge{font-size:11px;font-weight:400;color:rgba(255,255,255,0.45);letter-spacing:0.06em;text-align:right;line-height:1.5;}
+    .arch-bot{padding:20px 24px;background:#f4f6f8;}
+    .arch-bot-label{font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#999;margin-bottom:6px;}
+    .arch-bot-name{font-size:15px;font-weight:500;color:#111;margin-bottom:4px;}
+    .arch-bot-desc{font-size:12px;color:#777;line-height:1.6;}
+    .arch-connector{display:flex;align-items:center;justify-content:center;padding:10px 24px;gap:8px;}
+    .arch-connector-line{flex:1;height:1px;background:rgba(0,0,0,0.1);}
+    .arch-connector-label{font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);white-space:nowrap;}
+    .what-cta{max-width:var(--max);margin:0 auto;padding:48px 48px 0;border-top:1px solid rgba(0,0,0,0.08);margin-top:56px;}
+    .nfh-callout{max-width:var(--max);margin:0 auto;padding:36px 48px;background:#f4f6f8;border-left:3px solid var(--blue);margin-top:40px;}
+    .nfh-callout p{font-size:14px;color:#444;line-height:1.7;margin-bottom:8px;}
+    .nfh-callout a{font-size:13px;font-weight:500;color:var(--blue);}
+    .btn-primary{background:var(--blue);color:#fff;font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:14px 28px;transition:background 0.15s;display:inline-flex;align-items:center;gap:8px;}
+    .btn-primary:hover{background:#005fa8;}
+
+    /* HOW TAB */
+    .how-section{background:var(--dark);padding:96px 0;}
+    .how-inner{max-width:var(--max);margin:0 auto;padding:0 48px;}
+    .how-header{margin-bottom:72px;border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:48px;}
+    .how-header h2{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(52px,7vw,96px);line-height:0.9;color:#fff;margin-bottom:16px;}
+    .how-header p{font-size:17px;font-weight:300;color:rgba(255,255,255,0.45);max-width:380px;line-height:1.6;}
+    .statement{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding:64px 0;border-bottom:1px solid rgba(255,255,255,0.07);}
+    .statement--flip{direction:rtl;} .statement--flip>*{direction:ltr;}
+    .stmt-num{font-family:var(--font-display);font-weight:900;font-size:72px;line-height:1;color:rgba(255,255,255,0.07);margin-bottom:4px;}
+    .stmt-headline{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(40px,5vw,68px);line-height:0.9;color:#fff;margin-bottom:16px;}
+    .stmt-body{font-size:15px;font-weight:300;color:rgba(255,255,255,0.5);line-height:1.75;}
+    .stmt-canvas{background:#050e1a;border:1px solid rgba(0,120,206,0.18);}
+    .how-canvas{width:100%;height:280px;display:block;}
+    .how-cta{padding-top:64px;}
+
+    /* POSSIBLE TAB */
+    .possible-section{background:#fff;padding:96px 0;}
+    .possible-inner{max-width:var(--max);margin:0 auto;padding:0 48px;}
+    .possible-header{margin-bottom:64px;border-bottom:2px solid #111;padding-bottom:48px;}
+    .possible-header h2{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(44px,6vw,80px);line-height:0.9;color:#111;margin-bottom:16px;}
+    .possible-header p{font-size:16px;font-weight:300;color:#666;max-width:440px;line-height:1.7;}
+    .possible-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-left:1px solid rgba(0,0,0,0.08);}
+    .possible-item{padding:48px;border-right:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);}
+    .possible-item-num{font-family:var(--font-display);font-weight:900;font-size:52px;color:rgba(0,0,0,0.06);line-height:1;margin-bottom:8px;}
+    .possible-item-label{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:16px;display:block;}
+    .possible-item p{font-size:14px;font-weight:300;color:#555;line-height:1.8;}
+
+    /* PARTNERS */
+    .partners{background:#fff;padding:96px 0;border-top:3px solid var(--blue);}
+    .partners-inner{max-width:var(--max);margin:0 auto;padding:0 48px;}
+    .partners-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);margin-bottom:44px;display:block;}
+    .partners-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+    .partner-block{border-top:2px solid #111;padding-top:24px;}
+    .partner-logo{height:40px;width:auto;object-fit:contain;object-position:left;margin-bottom:18px;filter:brightness(0);opacity:0.72;transition:opacity 0.2s;}
+    .partner-block p{font-size:14px;font-weight:300;color:#555;line-height:1.8;}
+
+    /* CONTACT */
+    .contact{background:var(--dark);padding:100px 0;}
+    .contact-inner{max-width:var(--max);margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+    .contact-text h2{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(40px,5vw,68px);line-height:0.92;color:#fff;margin-bottom:20px;}
+    .contact-text h2 em{font-style:italic;text-transform:none;color:rgba(255,255,255,0.38);}
+    .contact-text p{font-size:14px;font-weight:300;color:rgba(255,255,255,0.42);line-height:1.75;}
+    .contact-text .eyebrow{color:var(--blue);}
+    .contact-form{display:flex;flex-direction:column;gap:14px;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    .form-field{display:flex;flex-direction:column;gap:6px;}
+    .form-field label{font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.32);}
+    .form-field input,.form-field textarea{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:#fff;font-family:var(--font);font-size:14px;padding:11px 14px;outline:none;transition:border-color 0.15s;}
+    .form-field input:focus,.form-field textarea:focus{border-color:var(--blue);}
+    .form-field input::placeholder,.form-field textarea::placeholder{color:rgba(255,255,255,0.18);}
+    .form-field textarea{resize:vertical;}
+    .btn-submit{background:var(--blue);color:#fff;border:none;cursor:pointer;font-family:var(--font);font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:13px 28px;align-self:flex-start;transition:background 0.15s;}
+    .btn-submit:hover{background:#005fa8;}
+    .form-success{display:none;color:#fff;padding:40px 0;}
+    .success-check{font-size:40px;color:var(--blue);margin-bottom:10px;}
+
+    /* FOOTER */
+    .footer{background:#000;padding:48px 0 28px;}
+    .footer-inner{max-width:var(--max);margin:0 auto;padding:0 48px;display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:36px;}
+    .footer-brand{display:flex;flex-direction:column;align-items:flex-start;}
+    .footer-brand p{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-top:10px;margin-bottom:10px;}
+    .footer-partner-logos{display:flex;align-items:center;gap:16px;}
+    .footer-partner-logo{display:block;object-fit:contain;filter:brightness(0) invert(1);opacity:0.28;transition:opacity 0.2s;}
+    .footer-partner-logo:hover{opacity:0.55;}
+    .footer-partner-logo--nfh{height:16px;} .footer-partner-logo--wri{height:22px;}
+    .footer-nav{display:flex;flex-direction:column;gap:10px;align-items:flex-end;}
+    .footer-nav a{font-size:13px;color:rgba(255,255,255,0.25);transition:color 0.15s;}
+    .footer-nav a:hover{color:rgba(255,255,255,0.6);}
+    .footer-bottom{max-width:var(--max);margin:0 auto;padding:18px 48px 0;border-top:1px solid rgba(255,255,255,0.06);font-size:12px;color:rgba(255,255,255,0.15);}
+
+    @media(max-width:900px){
+      .nav{padding:0 24px;} .nav-links{display:none;}
+      .page-header{padding:120px 24px 56px;}
+      .tab-nav-inner{padding:0 24px;overflow-x:auto;}
+      .what-inner,.contact-inner{grid-template-columns:1fr;gap:40px;padding:0 24px;}
+      .what-section,.how-section,.possible-section,.contact{padding:64px 0;}
+      .how-inner,.possible-inner,.partners-inner{padding:0 24px;}
+      .statement{grid-template-columns:1fr;gap:32px;} .statement--flip{direction:ltr;}
+      .possible-grid{grid-template-columns:1fr;}
+      .partners-grid,.form-row{grid-template-columns:1fr;}
+      .footer-inner{padding:0 24px;flex-direction:column;gap:28px;}
+      .footer-nav{align-items:flex-start;}
+      .footer-bottom{padding:18px 24px 0;}
+      .nfh-callout{margin:40px 24px 0;}
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index-c40-preview.html" class="nav-logo"><img src="brand_assets/NEWNEWLOGO.png" alt="Urban Web"></a>
+      <div class="nav-links">
+        <a href="index-c40-preview.html" class="nav-link">Home</a>
+        <a href="urban-web-c40-preview.html" class="nav-link active">What is Urban Web</a>
+        <a href="use-cases-c40-preview.html" class="nav-link">Use Cases</a>
+      </div>
+      <a href="#contact" class="btn-nav">Get in touch</a>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-inner">
+      <span class="eyebrow">Urban Web</span>
+      <h1>The open layer that<br>connects how a city moves.</h1>
+      <p>The web connected information. GPS connected position. Mobile networks connected devices. Urban Web connects how a city moves.</p>
+    </div>
+  </div>
+
+  <div class="tab-nav">
+    <div class="tab-nav-inner">
+      <button class="tab-btn active" data-tab="what">What is Urban Web</button>
+      <button class="tab-btn" data-tab="how">How it Works</button>
+      <button class="tab-btn" data-tab="possible">What it Makes Possible</button>
+    </div>
+  </div>
+
+  <!-- TAB 1: WHAT -->
+  <div class="tab-panel active" id="tab-what">
+    <div class="what-section">
+      <div class="what-inner">
+        <div class="what-text">
+          <h2 class="section-heading">A shared infrastructure.<br>Owned by no one.</h2>
+          <p>It is a shared open standard that any mobility service can adopt once, enabling it to speak directly to any other service that has done the same. Urban Web does not sit in the middle — it defines the language both sides speak.</p>
+          <div class="what-standout">Not a platform, not an intermediary — a shared standard. Like HTTP for the web, but for how a city moves.</div>
+          <p>Cities that build on this standard don't just move people more efficiently. They create the conditions for culture, climate action, economic opportunity, and ideas that haven't yet been imagined to find each other directly — without a gatekeeper in between.</p>
+        </div>
+        <div>
+          <div class="arch-diagram">
+            <div class="arch-layer">
+              <div class="arch-layer-label">Any service that speaks Urban Web can reach any other — directly</div>
+              <div class="arch-chips">
+                <span class="arch-chip active">Transit</span>
+                <span class="arch-chip active">Ride-hailing</span>
+                <span class="arch-chip active">Micro-mobility</span>
+                <span class="arch-chip">Logistics</span>
+                <span class="arch-chip">EV Charging</span>
+                <span class="arch-chip">Parking</span>
+                <span class="arch-chip">Urban aviation</span>
+              </div>
+            </div>
+            <div class="arch-connector">
+              <div class="arch-connector-line"></div>
+              <span class="arch-connector-label">Connections are peer-to-peer — nothing in between</span>
+              <div class="arch-connector-line"></div>
+            </div>
+            <div class="arch-mid">
+              <div>
+                <div class="arch-mid-name">Urban Web</div>
+                <div class="arch-mid-badge" style="text-align:left;margin-top:4px">A shared open standard — not a relay or intermediary</div>
+              </div>
+              <div class="arch-mid-badge">Owned by no one.<br>Open to everyone.</div>
+            </div>
+            <div class="arch-connector">
+              <div class="arch-connector-line"></div>
+              <span class="arch-connector-label">Built on</span>
+              <div class="arch-connector-line"></div>
+            </div>
+            <div class="arch-bot">
+              <div class="arch-bot-label">Foundation</div>
+              <div class="arch-bot-name">The NFH Fabric</div>
+              <div class="arch-bot-desc">Global decentralised infrastructure for open peer-to-peer value exchange.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nfh-callout">
+        <p>Urban Web is built on the NFH Fabric, a decentralised global infrastructure for open peer-to-peer value exchange.</p>
+        <a href="https://docs.nfh.global" target="_blank" rel="noopener">docs.nfh.global →</a>
+      </div>
+      <div style="max-width:var(--max);margin:40px auto 0;padding:0 48px;">
+        <a href="use-cases-c40-preview.html" class="btn-primary">Explore use cases →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: HOW -->
+  <div class="tab-panel" id="tab-how">
+    <div class="how-section">
+      <div class="how-inner">
+        <div class="how-header">
+          <h2>Four ideas.<br>One fundamental shift.</h2>
+          <p>Every network that changed the world worked this way.</p>
+        </div>
+        <div class="statement">
+          <div class="stmt-text">
+            <div class="stmt-num">01</div>
+            <div class="stmt-headline">Join once.</div>
+            <p class="stmt-body">A single connection to Urban Web makes any mobility service immediately reachable by every other service on the network. Not a connection to each partner — a connection to the shared layer.</p>
+          </div>
+          <div class="stmt-canvas"><canvas class="how-canvas" id="howCanvas1"></canvas></div>
+        </div>
+        <div class="statement statement--flip">
+          <div class="stmt-text">
+            <div class="stmt-num">02</div>
+            <div class="stmt-headline">Reach everything.</div>
+            <p class="stmt-body">The moment a service joins, every other service on the network becomes reachable — simultaneously. Not one by one. All at once. That simultaneity is the point.</p>
+          </div>
+          <div class="stmt-canvas"><canvas class="how-canvas" id="howCanvas2"></canvas></div>
+        </div>
+        <div class="statement">
+          <div class="stmt-text">
+            <div class="stmt-num">03</div>
+            <div class="stmt-headline">Grow beyond mobility.</div>
+            <p class="stmt-body">As more services join, the network expands. Commerce, logistics, energy — the city's mobility layer becomes a node in a larger network of networks.</p>
+          </div>
+          <div class="stmt-canvas"><canvas class="how-canvas" id="howCanvas3"></canvas></div>
+        </div>
+        <div class="statement statement--flip">
+          <div class="stmt-text">
+            <div class="stmt-num">04</div>
+            <div class="stmt-headline">Nothing in the middle.</div>
+            <p class="stmt-body">Services connect directly — peer to peer. Urban Web defines how they talk. It does not relay, route, or control what they say. Think of it like TCP/IP: the protocol that makes the internet work, while sitting invisibly beneath every direct connection it enables.</p>
+          </div>
+          <div class="stmt-canvas"><canvas class="how-canvas" id="howCanvas4"></canvas></div>
+        </div>
+        <div class="how-cta">
+          <a href="use-cases-c40-preview.html" class="btn-primary">Explore use cases →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: POSSIBLE -->
+  <div class="tab-panel" id="tab-possible">
+    <div class="possible-section">
+      <div class="possible-inner">
+        <div class="possible-header">
+          <h2>Not just what you build today.<br>What others build tomorrow.</h2>
+          <p>The value of open infrastructure is not what you build on it. It's what others build, without asking permission.</p>
+        </div>
+        <div class="possible-grid">
+          <div class="possible-item">
+            <div class="possible-item-num">01</div>
+            <span class="possible-item-label">The obvious unlock</span>
+            <p>When every mobility service in a city speaks the same standard, any two of them can work together without a bilateral agreement, a custom build, or a procurement cycle. A service that joins can immediately reach every other service that has joined.</p>
+          </div>
+          <div class="possible-item">
+            <div class="possible-item-num">02</div>
+            <span class="possible-item-label">The deeper point</span>
+            <p>The more important aspect is what nobody planned. When everything sits on a shared open layer, the conditions exist for solutions that nobody has thought of yet — including the next generation of AI-native interfaces that discover, transact, and coordinate across a city.</p>
+          </div>
+          <div class="possible-item">
+            <div class="possible-item-num">03</div>
+            <span class="possible-item-label">For the city</span>
+            <p>Cities gain a real-time view of how their mobility network is actually being used — not service by service, but across the whole. Policy, investment, and infrastructure decisions made with data that has never existed before.</p>
+          </div>
+          <div class="possible-item">
+            <div class="possible-item-num">04</div>
+            <span class="possible-item-label">For the future</span>
+            <p>New mobility categories — autonomous vehicles, urban aviation, energy-as-transport — join the same layer without rebuilding the connections. The infrastructure grows with the city, not behind it.</p>
+          </div>
+        </div>
+        <div style="margin-top:56px;">
+          <a href="use-cases-c40-preview.html" class="btn-primary">Explore use cases →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARTNERS -->
+  <section class="partners" id="partners">
+    <div class="partners-inner">
+      <span class="partners-eyebrow">A program by</span>
+      <div class="partners-grid">
+        <div class="partner-block">
+          <a href="https://networksforhumanity.org" target="_blank" rel="noopener"><img src="brand_assets/NFH Logo.png" alt="Networks for Humanity" class="partner-logo"></a>
+          <p>Networks for Humanity (NFH) is a global non-profit initiative building open, interoperable and decentralised digital infrastructure. Their shared network powers Urban Web, providing the open standard that any mobility service can connect to.</p>
+        </div>
+        <div class="partner-block">
+          <a href="https://wri.org" target="_blank" rel="noopener"><img src="brand_assets/World_Resources_Institute_logo.svg.png" alt="World Resources Institute" class="partner-logo"></a>
+          <p>WRI is a global research organisation working to improve people's lives, protect nature and stabilise the climate. They bring city relationships, policy expertise, and on-the-ground research that makes Urban Web work in practice.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <div class="contact-text">
+        <span class="eyebrow">The invitation</span>
+        <h2>The cities that move first shape what comes next.<br><em>The rest inherit what they build.</em></h2>
+        <p>We're speaking with city officials, transport authorities, and urban policy leaders who want to explore what this could mean for their city.</p>
+      </div>
+      <div>
+        <form id="contactForm" class="contact-form">
+          <div class="form-row">
+            <div class="form-field"><label>Your name</label><input type="text" name="name" placeholder="Name" required></div>
+            <div class="form-field"><label>City or organisation</label><input type="text" name="org" placeholder="e.g. City Transport Authority" required></div>
+          </div>
+          <div class="form-field"><label>Email</label><input type="email" name="email" placeholder="your@email.com" required></div>
+          <div class="form-field"><label>What matters most to your city?</label><textarea name="message" placeholder="Tell us briefly…" rows="4"></textarea></div>
+          <button type="submit" class="btn-submit">Send →</button>
+        </form>
+        <div class="form-success" id="formSuccess"><div class="success-check">✓</div><h3 style="color:#fff;margin-bottom:8px">Thank you</h3><p style="color:rgba(255,255,255,0.45)">We'll be in touch.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="brand_assets/NEWNEWLOGO.png" alt="Urban Web" height="136" style="filter:brightness(0) invert(1);opacity:0.35;margin-left:-22px;">
+        <p>A program by</p>
+        <div class="footer-partner-logos">
+          <a href="https://networksforhumanity.org" target="_blank" rel="noopener"><img src="brand_assets/NFH Logo.png" alt="NFH" class="footer-partner-logo footer-partner-logo--nfh"></a>
+          <a href="https://wri.org" target="_blank" rel="noopener"><img src="brand_assets/World_Resources_Institute_logo.svg.png" alt="WRI" class="footer-partner-logo footer-partner-logo--wri"></a>
+        </div>
+      </div>
+      <nav class="footer-nav">
+        <a href="index-c40-preview.html">Home</a>
+        <a href="urban-web-c40-preview.html">What is Urban Web</a>
+        <a href="use-cases-c40-preview.html">Use Cases</a>
+        <a href="#contact">Get in touch</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">© 2025 Urban Web Program</div>
+  </footer>
+
+  <script>
+  /* Tabs */
+  (function(){
+    const btns=document.querySelectorAll('.tab-btn'),panels=document.querySelectorAll('.tab-panel');
+    btns.forEach(btn=>btn.addEventListener('click',()=>{
+      const tab=btn.dataset.tab;
+      btns.forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+      panels.forEach(p=>p.classList.toggle('active',p.id==='tab-'+tab));
+      if(tab==='how') setTimeout(initHowCanvases,50);
+      else stopCanvases();
+    }));
+  })();
+
+  /* Contact */
+  (function(){
+    const form=document.getElementById('contactForm'),success=document.getElementById('formSuccess');
+    if(!form||!success)return;
+    form.addEventListener('submit',e=>{e.preventDefault();form.style.display='none';success.style.display='block';});
+  })();
+
+  /* ── Canvas utilities (from production) ── */
+  function setupCanvas(el){
+    if(!el)return null;
+    const ctx=el.getContext('2d');
+    const dpr=Math.min(window.devicePixelRatio||1,2);
+    const w=el.offsetWidth,h=el.offsetHeight;
+    el.width=w*dpr;el.height=h*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    return{ctx,w,h};
+  }
+  function ss(t){t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);}
+
+  const RING_NODES=[
+    {label:'Transit',   col:'#2A8FE0'},
+    {label:'Ride-hail', col:'#D4782A'},
+    {label:'Metro',     col:'#7B60D0'},
+    {label:'Micro',     col:'#3D9464'},
+    {label:'e-Buses',   col:'#2A9E72'},
+    {label:'Parking',   col:'#258BAA'},
+  ];
+  const OUTER_NODES=[
+    {label:'Commerce',col:'#8FA5AB',a:20 },
+    {label:'Energy',  col:'#C0392B',a:85 },
+    {label:'Logistics',col:'#A0521A',a:200},
+    {label:'Health',  col:'#5B3FA8',a:260},
+  ];
+
+  let rafs={};
+  function stopCanvases(){Object.values(rafs).forEach(cancelAnimationFrame);rafs={};}
+
+  function drawBg(ctx,w,h){
+    ctx.fillStyle='#07111e';ctx.fillRect(0,0,w,h);
+    ctx.fillStyle='rgba(255,255,255,0.018)';
+    for(let x=0;x<=w;x+=28)for(let y=0;y<=h;y+=28){ctx.beginPath();ctx.arc(x,y,0.7,0,Math.PI*2);ctx.fill();}
+  }
+
+  function drawNode(ctx,x,y,r,col,label,alpha,glow){
+    alpha=alpha||1;glow=glow||1;
+    ctx.save();ctx.globalAlpha=alpha*0.13*glow;ctx.strokeStyle=col;ctx.lineWidth=1;
+    ctx.shadowColor=col;ctx.shadowBlur=16;
+    ctx.beginPath();ctx.arc(x,y,r*1.85,0,Math.PI*2);ctx.stroke();ctx.restore();
+    ctx.save();ctx.globalAlpha=alpha*0.15*glow;ctx.fillStyle=col;
+    ctx.shadowColor=col;ctx.shadowBlur=20;
+    ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();ctx.restore();
+    ctx.save();ctx.globalAlpha=alpha*0.85;ctx.strokeStyle=col;ctx.lineWidth=2;
+    ctx.shadowColor=col;ctx.shadowBlur=10*glow;
+    ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.stroke();ctx.restore();
+    if(label){
+      ctx.save();ctx.globalAlpha=alpha*0.6;ctx.fillStyle='#fff';
+      ctx.font='500 9px DM Sans,sans-serif';ctx.textAlign='center';ctx.textBaseline='top';
+      ctx.fillText(label,x,y+r+5);ctx.restore();
+    }
+  }
+
+  function drawEnergyLine(ctx,x1,y1,x2,y2,col,alpha,t,speed,pts){
+    speed=speed||0.02;pts=pts||3;
+    ctx.save();ctx.strokeStyle=col;ctx.globalAlpha=alpha*0.2;ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.restore();
+    for(let i=0;i<pts;i++){
+      const ph=((t*speed+i/pts)%1);
+      const px=x1+(x2-x1)*ph,py=y1+(y2-y1)*ph;
+      const a2=Math.sin(ph*Math.PI)*alpha,sz=3*Math.sin(ph*Math.PI);
+      if(sz<0.1)continue;
+      ctx.save();ctx.globalAlpha=a2;ctx.fillStyle=col;
+      ctx.shadowColor=col;ctx.shadowBlur=10;
+      ctx.beginPath();ctx.arc(px,py,sz,0,Math.PI*2);ctx.fill();ctx.restore();
+    }
+  }
+
+  /* Canvas 1 — Join once */
+  function drawC1(el){
+    const s=setupCanvas(el);if(!s)return;
+    const{ctx,w,h}=s,cx=w/2,cy=h/2,rR=Math.min(w,h)*0.31,r=10,PERIOD=300;
+    let t=0;
+    const existing=[
+      {a:Math.PI*0.08,col:'#D4782A',lbl:'Ride-hail'},
+      {a:Math.PI*0.62,col:'#3D9464',lbl:'Micro'},
+      {a:Math.PI*1.05,col:'#7B60D0',lbl:'Parking'},
+      {a:Math.PI*1.5, col:'#258BAA',lbl:'Metro'},
+      {a:Math.PI*1.9, col:'#2A9E72',lbl:'e-Buses'},
+    ];
+    const joinA=Math.PI*1.32,endX=cx+Math.cos(joinA)*rR,endY=cy+Math.sin(joinA)*rR;
+    const startX=cx-rR*2.6,startY=cy+30;
+    function draw(){
+      ctx.clearRect(0,0,w,h);drawBg(ctx,w,h);
+      const phase=t%PERIOD,joining=phase<150;
+      const progress=joining?ss(phase/150):1;
+      const snapAge=joining?0:phase-150,snapFade=Math.max(0,1-snapAge/55);
+      ctx.save();ctx.strokeStyle=`rgba(0,120,206,${0.22+snapFade*0.22})`;ctx.lineWidth=1.5;
+      ctx.shadowColor='#0078CE';ctx.shadowBlur=6+snapFade*28;
+      ctx.beginPath();ctx.arc(cx,cy,rR,0,Math.PI*2);ctx.stroke();ctx.restore();
+      ctx.save();ctx.globalAlpha=0.3+snapFade*0.2;ctx.fillStyle='#4A9FE0';
+      ctx.font='500 10px DM Sans,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText('Urban Web',cx,cy);ctx.restore();
+      existing.forEach((n,i)=>{
+        const nx=cx+Math.cos(n.a)*rR,ny=cy+Math.sin(n.a)*rR;
+        const pulse=(Math.sin(t*0.025+i*1.2)+1)/2;
+        drawNode(ctx,nx,ny,9,n.col,n.lbl,0.7+pulse*0.15,0.6+pulse*0.4);
+      });
+      const nx=joining?startX+(endX-startX)*progress:endX;
+      const ny=joining?startY+(endY-startY)*progress:endY;
+      if(joining&&progress>0.08){
+        for(let i=5;i>=1;i--){
+          const tp=Math.max(0,progress-i*0.05);
+          const tx=startX+(endX-startX)*tp,ty=startY+(endY-startY)*tp;
+          ctx.save();ctx.globalAlpha=0.055*i;ctx.fillStyle='#2A8FE0';
+          ctx.shadowColor='#2A8FE0';ctx.shadowBlur=8;
+          ctx.beginPath();ctx.arc(tx,ty,10-i*1.2,0,Math.PI*2);ctx.fill();ctx.restore();
+        }
+      }
+      if(progress>0.62){
+        const gp=(progress-0.62)/0.38;
+        ctx.save();ctx.strokeStyle=`rgba(42,143,224,${0.55*gp})`;ctx.lineWidth=3;
+        ctx.shadowColor='#2A8FE0';ctx.shadowBlur=20;
+        ctx.beginPath();ctx.arc(cx,cy,rR,joinA-0.55,joinA+0.55);ctx.stroke();ctx.restore();
+      }
+      if(snapFade>0){
+        ctx.save();ctx.globalAlpha=snapFade*0.6;ctx.strokeStyle='#2A8FE0';ctx.lineWidth=1.5;
+        ctx.shadowColor='#2A8FE0';ctx.shadowBlur=24;
+        ctx.beginPath();ctx.arc(endX,endY,24*(1.4-snapFade*0.8),0,Math.PI*2);ctx.stroke();ctx.restore();
+      }
+      drawNode(ctx,nx,ny,r,'#2A8FE0','',1,1.6);
+      ctx.fillStyle='#fff';ctx.font='600 8px DM Sans,sans-serif';
+      ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('Bus',nx,ny);
+      if(joining){
+        ctx.save();ctx.globalAlpha=progress*0.75;ctx.fillStyle='rgba(120,190,255,0.9)';
+        ctx.font='500 10px DM Sans,sans-serif';ctx.textAlign='center';ctx.textBaseline='bottom';
+        ctx.fillText('City Bus Network',nx,ny-16);ctx.restore();
+      }
+      t++;if(t>=PERIOD+60)t=0;rafs[1]=requestAnimationFrame(draw);
+    }
+    rafs[1]=requestAnimationFrame(draw);
+  }
+
+  /* Canvas 2 — Reach everything */
+  function drawC2(el){
+    const s=setupCanvas(el);if(!s)return;
+    const{ctx,w,h}=s,cx=w/2,cy=h/2,rR=Math.min(w,h)*0.31;
+    let t=0;
+    function draw(){
+      ctx.clearRect(0,0,w,h);drawBg(ctx,w,h);
+      const pulse=(Math.sin(t*0.018)+1)/2;
+      ctx.save();ctx.strokeStyle=`rgba(0,120,206,${0.18+pulse*0.08})`;ctx.lineWidth=1.5;
+      ctx.shadowColor='#0078CE';ctx.shadowBlur=5+pulse*6;
+      ctx.beginPath();ctx.arc(cx,cy,rR,0,Math.PI*2);ctx.stroke();ctx.restore();
+      const fA=-Math.PI/2,fx=cx+Math.cos(fA)*rR,fy=cy+Math.sin(fA)*rR;
+      RING_NODES.forEach((_,i)=>{
+        if(i===0)return;
+        const a=(i/RING_NODES.length)*Math.PI*2-Math.PI/2;
+        drawEnergyLine(ctx,fx,fy,cx+Math.cos(a)*rR,cy+Math.sin(a)*rR,RING_NODES[i].col,0.3+pulse*0.2,t,0.012+i*0.002,2);
+      });
+      RING_NODES.forEach((n,i)=>{
+        const a=(i/RING_NODES.length)*Math.PI*2-Math.PI/2;
+        const nx2=cx+Math.cos(a)*rR,ny2=cy+Math.sin(a)*rR;
+        const isFocus=i===0;
+        drawNode(ctx,nx2,ny2,isFocus?11:9,n.col,n.label,isFocus?1:0.45+pulse*0.3,isFocus?1.8:0.4+pulse*0.5);
+      });
+      t++;rafs[2]=requestAnimationFrame(draw);
+    }
+    rafs[2]=requestAnimationFrame(draw);
+  }
+
+  /* Canvas 3 — Grow beyond */
+  function drawC3(el){
+    const s=setupCanvas(el);if(!s)return;
+    const{ctx,w,h}=s,cx=w/2,cy=h/2,innerR=Math.min(w,h)*0.22,PERIOD=280;
+    let t=0;
+    function draw(){
+      ctx.clearRect(0,0,w,h);drawBg(ctx,w,h);
+      const phase=(t%PERIOD)/PERIOD,expand=phase<0.5?ss(phase*2):1;
+      const outerR=innerR+Math.min(w,h)*0.15*expand;
+      ctx.save();ctx.strokeStyle='rgba(0,120,206,0.3)';ctx.lineWidth=1.5;
+      ctx.shadowColor='#0078CE';ctx.shadowBlur=10;
+      ctx.beginPath();ctx.arc(cx,cy,innerR,0,Math.PI*2);ctx.stroke();ctx.restore();
+      RING_NODES.slice(0,5).forEach((n,i)=>{
+        const a=(i/5)*Math.PI*2-Math.PI/2,pulse=(Math.sin(t*0.03+i)+1)/2;
+        drawNode(ctx,cx+Math.cos(a)*innerR,cy+Math.sin(a)*innerR,9,n.col,'',0.85,0.7+pulse*0.35);
+      });
+      if(expand>0.05){
+        ctx.save();ctx.setLineDash([5,6]);ctx.strokeStyle=`rgba(0,120,206,${0.45*expand})`;ctx.lineWidth=1.5;
+        ctx.beginPath();ctx.arc(cx,cy,outerR,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);ctx.restore();
+        OUTER_NODES.forEach((n,i)=>{
+          const op=Math.min(Math.max((expand-i*0.22)*4,0),1);if(op<=0)return;
+          const a=n.a*Math.PI/180,nx=cx+Math.cos(a)*outerR,ny=cy+Math.sin(a)*outerR;
+          const ni=Math.round(i*5/4)%5,ia=(ni/5)*Math.PI*2-Math.PI/2;
+          ctx.save();ctx.globalAlpha=op*0.2;ctx.strokeStyle=n.col;ctx.lineWidth=1;
+          ctx.beginPath();ctx.moveTo(cx+Math.cos(ia)*innerR,cy+Math.sin(ia)*innerR);ctx.lineTo(nx,ny);ctx.stroke();ctx.restore();
+          drawNode(ctx,nx,ny,8,n.col,n.label,op,0.9);
+        });
+      }
+      ctx.save();ctx.globalAlpha=0.22;ctx.fillStyle='#fff';
+      ctx.font='500 9px DM Sans,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText('A network of networks',cx,cy);ctx.restore();
+      t++;if(t>=PERIOD)t=0;rafs[3]=requestAnimationFrame(draw);
+    }
+    rafs[3]=requestAnimationFrame(draw);
+  }
+
+  /* Canvas 4 — Nothing in the middle */
+  function drawC4(el){
+    const s=setupCanvas(el);if(!s)return;
+    const{ctx,w,h}=s,cx=w/2,cy=h/2,PERIOD=240;
+    const nA={x:w*0.13,y:cy-18,col:'#2A8FE0',label:'Transit'};
+    const nB={x:w*0.87,y:cy+18,col:'#3D9464',label:'Ride-hail'};
+    let t=0;
+    function draw(){
+      ctx.clearRect(0,0,w,h);drawBg(ctx,w,h);
+      const phase=(t%PERIOD)/PERIOD;
+      const lineP=phase<0.55?ss(phase/0.55):1;
+      const uwFade=phase>0.38?ss((phase-0.38)/0.38):0;
+      const uwOp=0.38*(1-uwFade);
+      if(uwOp>0.01){
+        ctx.save();ctx.globalAlpha=uwOp;
+        ctx.shadowColor='#0078CE';ctx.shadowBlur=14*(1-uwFade);
+        ctx.strokeStyle='rgba(0,120,206,0.75)';ctx.lineWidth=1.5;
+        ctx.beginPath();ctx.arc(cx,cy,26+uwFade*8,0,Math.PI*2);ctx.stroke();
+        ctx.fillStyle='rgba(0,120,206,0.09)';
+        ctx.beginPath();ctx.arc(cx,cy,26+uwFade*8,0,Math.PI*2);ctx.fill();
+        ctx.fillStyle='rgba(110,170,230,0.75)';ctx.font='500 9px DM Sans,sans-serif';
+        ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('Urban Web',cx,cy);ctx.restore();
+      }
+      if(lineP>0){
+        const ex=nA.x+(nB.x-nA.x)*lineP,ey=nA.y+(nB.y-nA.y)*lineP;
+        ctx.save();ctx.strokeStyle=`rgba(42,143,224,${0.65*lineP})`;ctx.lineWidth=2.5;
+        ctx.shadowColor='#2A8FE0';ctx.shadowBlur=14;
+        ctx.beginPath();ctx.moveTo(nA.x,nA.y);ctx.lineTo(ex,ey);ctx.stroke();ctx.restore();
+        if(lineP>0.3)drawEnergyLine(ctx,nA.x,nA.y,nB.x,nB.y,'#2A8FE0',lineP,t,0.022,4);
+        if(lineP>=0.99){
+          ctx.save();ctx.globalAlpha=0.8;ctx.fillStyle='rgba(140,200,255,0.95)';
+          ctx.font='600 10px DM Sans,sans-serif';ctx.textAlign='center';ctx.textBaseline='bottom';
+          ctx.fillText('Direct. No intermediary.',(nA.x+nB.x)/2,(nA.y+nB.y)/2-10);ctx.restore();
+        }
+      }
+      [nA,nB].forEach(n=>{
+        drawNode(ctx,n.x,n.y,11,n.col,n.label,1,1.4);
+        ctx.fillStyle='#fff';ctx.font='600 8px DM Sans,sans-serif';
+        ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(n===nA?'A':'B',n.x,n.y);
+      });
+      t++;if(t>=PERIOD)t=0;rafs[4]=requestAnimationFrame(draw);
+    }
+    rafs[4]=requestAnimationFrame(draw);
+  }
+
+  function initHowCanvases(){
+    stopCanvases();
+    drawC1(document.getElementById('howCanvas1'));
+    drawC2(document.getElementById('howCanvas2'));
+    drawC3(document.getElementById('howCanvas3'));
+    drawC4(document.getElementById('howCanvas4'));
+  }
+  </script>
+</body>
+</html>
