@@ -1,0 +1,6 @@
+{
+  "files": ["index.html", "urban-web-c40-preview.html", "use-cases-c40-preview.html"],
+  "insertBefore": "</body>",
+  "commentSyntax": "html",
+  "cspChecked": true
+}
