@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>What is Urban Web — C40-Style Preview</title>
+  <title>What is Urban Web — Urban Web</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
   <style>
@@ -33,17 +33,7 @@
     .page-header h1{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(56px,8vw,108px);line-height:0.9;color:#fff;margin-bottom:24px;max-width:860px;}
     .page-header p{font-size:18px;font-weight:300;color:rgba(255,255,255,0.5);max-width:520px;line-height:1.65;}
 
-    /* TAB NAV */
-    .tab-nav{position:sticky;top:72px;z-index:200;background:var(--dark);border-bottom:1px solid rgba(255,255,255,0.08);}
-    .tab-nav-inner{max-width:var(--max);margin:0 auto;padding:0 48px;display:flex;}
-    .tab-btn{background:none;border:none;cursor:pointer;font-family:var(--font);font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);padding:20px 0;margin-right:40px;border-bottom:2px solid transparent;transition:color 0.15s,border-color 0.15s;}
-    .tab-btn:hover{color:rgba(255,255,255,0.7);}
-    .tab-btn.active{color:#fff;border-bottom-color:var(--blue);}
-
-    /* TAB PANELS */
-    .tab-panel{display:none;} .tab-panel.active{display:block;}
-
-    /* WHAT TAB */
+    /* WHAT SECTION */
     .what-section{background:#fff;padding:96px 0;}
     .what-inner{max-width:var(--max);margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
     .section-heading{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(44px,6vw,80px);line-height:0.92;margin-bottom:24px;}
@@ -51,7 +41,7 @@
     .what-text p{font-size:15px;font-weight:300;color:#555;line-height:1.8;margin-bottom:18px;}
     .what-standout{font-size:18px;color:#111;font-weight:500;border-left:2px solid var(--blue);padding-left:18px;margin:24px 0;}
 
-    /* Architecture diagram — CSS */
+    /* Architecture diagram */
     .arch-diagram{border:1px solid rgba(0,0,0,0.1);}
     .arch-layer{padding:20px 24px;border-bottom:1px solid rgba(0,0,0,0.08);}
     .arch-layer-label{font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#999;margin-bottom:10px;}
@@ -68,14 +58,23 @@
     .arch-connector{display:flex;align-items:center;justify-content:center;padding:10px 24px;gap:8px;}
     .arch-connector-line{flex:1;height:1px;background:rgba(0,0,0,0.1);}
     .arch-connector-label{font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);white-space:nowrap;}
-    .what-cta{max-width:var(--max);margin:0 auto;padding:48px 48px 0;border-top:1px solid rgba(0,0,0,0.08);margin-top:56px;}
+
+    /* On-fabric offerings layer in diagram */
+    .arch-offerings{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid rgba(0,0,0,0.08);}
+    .arch-offering{padding:16px 20px;border-right:1px solid rgba(0,0,0,0.08);text-decoration:none;display:flex;flex-direction:column;gap:3px;transition:background 0.15s;background:#fafbfc;}
+    .arch-offering:last-child{border-right:none;}
+    .arch-offering:hover{background:#eef4ff;}
+    .arch-offering-tag{font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);}
+    .arch-offering-name{font-size:13px;font-weight:600;color:#111;}
+    .arch-offering-desc{font-size:10px;color:#777;line-height:1.5;}
+
     .nfh-callout{max-width:var(--max);margin:0 auto;padding:36px 48px;background:#f4f6f8;border-left:3px solid var(--blue);margin-top:40px;}
     .nfh-callout p{font-size:14px;color:#444;line-height:1.7;margin-bottom:8px;}
     .nfh-callout a{font-size:13px;font-weight:500;color:var(--blue);}
     .btn-primary{background:var(--blue);color:#fff;font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:14px 28px;transition:background 0.15s;display:inline-flex;align-items:center;gap:8px;}
     .btn-primary:hover{background:#005fa8;}
 
-    /* HOW TAB */
+    /* HOW SECTION */
     .how-section{background:var(--dark);padding:96px 0;}
     .how-inner{max-width:var(--max);margin:0 auto;padding:0 48px;}
     .how-header{margin-bottom:72px;border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:48px;}
@@ -90,17 +89,35 @@
     .how-canvas{width:100%;height:280px;display:block;}
     .how-cta{padding-top:64px;}
 
-    /* POSSIBLE TAB */
-    .possible-section{background:#fff;padding:96px 0;}
-    .possible-inner{max-width:var(--max);margin:0 auto;padding:0 48px;}
-    .possible-header{margin-bottom:64px;border-bottom:2px solid #111;padding-bottom:48px;}
-    .possible-header h2{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(44px,6vw,80px);line-height:0.9;color:#111;margin-bottom:16px;}
-    .possible-header p{font-size:16px;font-weight:300;color:#666;max-width:440px;line-height:1.7;}
-    .possible-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-left:1px solid rgba(0,0,0,0.08);}
-    .possible-item{padding:48px;border-right:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);}
-    .possible-item-num{font-family:var(--font-display);font-weight:900;font-size:52px;color:rgba(0,0,0,0.06);line-height:1;margin-bottom:8px;}
-    .possible-item-label{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:16px;display:block;}
-    .possible-item p{font-size:14px;font-weight:300;color:#555;line-height:1.8;}
+    /* ENABLES SECTION */
+    .enables-section{background:#fff;padding:96px 0;}
+    .enables-inner{max-width:var(--max);margin:0 auto;padding:0 48px;}
+    .enables-header{margin-bottom:44px;max-width:560px;}
+    .enables-header h2{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(44px,6vw,80px);line-height:0.9;color:#111;margin-bottom:16px;}
+    .enables-header p{font-size:16px;font-weight:300;color:#666;max-width:380px;line-height:1.7;}
+    .enables-list{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-left:1px solid rgba(0,0,0,0.08);}
+    .enables-list-item{padding:36px 36px 36px 36px;border-right:1px solid rgba(0,0,0,0.08);border-top:1px solid rgba(0,0,0,0.08);}
+    .enables-item-label{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;display:block;}
+    .enables-item p{font-size:14px;font-weight:300;color:#555;line-height:1.8;}
+
+    /* ON THE FABRIC SECTION */
+    .fabric-section{background:#050d18;padding:96px 0;border-top:1px solid rgba(0,120,206,0.18);}
+    .fabric-inner{max-width:var(--max);margin:0 auto;padding:0 48px;}
+    .fabric-intro{margin-bottom:64px;border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:56px;}
+    .fabric-intro .eyebrow{color:var(--blue);}
+    .fabric-intro h2{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(44px,6vw,80px);line-height:0.92;color:#fff;margin-bottom:20px;}
+    .fabric-intro p{font-size:16px;font-weight:300;color:rgba(255,255,255,0.45);max-width:580px;line-height:1.75;}
+    .fabric-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid rgba(255,255,255,0.08);}
+    .fabric-card{padding:48px;border-right:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;}
+    .fabric-card:last-child{border-right:none;}
+    .fabric-card-eyebrow{margin-bottom:24px;}
+    .fabric-logo{height:44px;width:auto;display:block;opacity:0.88;}
+    .fabric-card-name{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(36px,4vw,56px);line-height:0.9;color:#fff;margin-bottom:16px;}
+    .fabric-card-tagline{font-size:14px;font-weight:300;color:rgba(255,255,255,0.55);line-height:1.75;margin-bottom:32px;border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:24px;}
+    .fabric-card-points{display:flex;flex-direction:column;gap:16px;flex:1;margin-bottom:32px;}
+    .fabric-card-point{font-size:13px;font-weight:300;color:rgba(255,255,255,0.48);line-height:1.75;}
+    .fabric-card-link{font-size:12px;font-weight:500;letter-spacing:0.06em;color:var(--blue);display:inline-flex;align-items:center;gap:4px;transition:color 0.15s;align-self:flex-start;}
+    .fabric-card-link:hover{color:#5bb3f5;}
 
     /* PARTNERS */
     .partners{background:#fff;padding:96px 0;border-top:3px solid var(--blue);}
@@ -149,17 +166,18 @@
     @media(max-width:900px){
       .nav{padding:0 24px;} .nav-links{display:none;}
       .page-header{padding:120px 24px 56px;}
-      .tab-nav-inner{padding:0 24px;overflow-x:auto;}
       .what-inner,.contact-inner{grid-template-columns:1fr;gap:40px;padding:0 24px;}
-      .what-section,.how-section,.possible-section,.contact{padding:64px 0;}
-      .how-inner,.possible-inner,.partners-inner{padding:0 24px;}
+      .what-section,.how-section,.enables-section,.fabric-section,.contact{padding:64px 0;}
+      .how-inner,.enables-inner,.fabric-inner,.partners-inner{padding:0 24px;}
       .statement{grid-template-columns:1fr;gap:32px;} .statement--flip{direction:ltr;}
-      .possible-grid{grid-template-columns:1fr;}
+      .enables-inner{padding:0 24px;}.enables-list{grid-template-columns:1fr;}
+      .fabric-grid{grid-template-columns:1fr;}
       .partners-grid,.form-row{grid-template-columns:1fr;}
       .footer-inner{padding:0 24px;flex-direction:column;gap:28px;}
       .footer-nav{align-items:flex-start;}
       .footer-bottom{padding:18px 24px 0;}
       .nfh-callout{margin:40px 24px 0;}
+      .fabric-card{padding:32px 24px;}
     }
   </style>
 </head>
@@ -185,156 +203,182 @@
     </div>
   </div>
 
-  <div class="tab-nav">
-    <div class="tab-nav-inner">
-      <button class="tab-btn active" data-tab="what">What is Urban Web</button>
-      <button class="tab-btn" data-tab="how">How it Works</button>
-      <button class="tab-btn" data-tab="possible">What it Makes Possible</button>
-    </div>
-  </div>
-
-  <!-- TAB 1: WHAT -->
-  <div class="tab-panel active" id="tab-what">
-    <div class="what-section">
-      <div class="what-inner">
-        <div class="what-text">
-          <h2 class="section-heading">A shared infrastructure.<br>Owned by no one.</h2>
-          <p>It is a shared standard that any mobility service can adopt once, making it reachable by every other service on the network.</p>
-          <div class="what-standout">Not a platform, not an intermediary — a shared standard. Like HTTP for the web, but for how a city moves.</div>
-          <p>Cities that build on this standard don't just move people more efficiently. They create the conditions for culture, climate action, economic opportunity, and ideas that haven't yet been imagined to find each other.</p>
-        </div>
-        <div>
-          <div class="arch-diagram">
-            <div class="arch-layer">
-              <div class="arch-layer-label">Any service can reach any other</div>
-              <div class="arch-chips">
-                <span class="arch-chip active">Transit</span>
-                <span class="arch-chip active">Ride-hailing</span>
-                <span class="arch-chip active">Micro-mobility</span>
-                <span class="arch-chip">Logistics</span>
-                <span class="arch-chip">EV Charging</span>
-                <span class="arch-chip">Parking</span>
-                <span class="arch-chip">Urban aviation</span>
-              </div>
+  <!-- SECTION 1: WHAT IS URBAN WEB -->
+  <section class="what-section">
+    <div class="what-inner">
+      <div class="what-text">
+        <h2 class="section-heading">A shared infrastructure.<br>Owned by no one.</h2>
+        <p>It is a shared standard that any mobility service can adopt once, making it reachable by every other service on the network.</p>
+        <div class="what-standout">Not a platform, not an intermediary — a shared standard. Like HTTP for the web, but for how a city moves.</div>
+        <p>Cities that build on this standard don't just move people more efficiently. They create the conditions for culture, climate action, economic opportunity, and ideas that haven't yet been imagined to find each other.</p>
+      </div>
+      <div>
+        <div class="arch-diagram">
+          <div class="arch-layer">
+            <div class="arch-layer-label">Any service can reach any other</div>
+            <div class="arch-chips">
+              <span class="arch-chip active">Transit</span>
+              <span class="arch-chip active">Ride-hailing</span>
+              <span class="arch-chip active">Micro-mobility</span>
+              <span class="arch-chip">Logistics</span>
+              <span class="arch-chip">EV Charging</span>
+              <span class="arch-chip">Parking</span>
+              <span class="arch-chip">Urban aviation</span>
             </div>
-            <div class="arch-connector">
-              <div class="arch-connector-line"></div>
-              <span class="arch-connector-label">Peer-to-peer connections</span>
-              <div class="arch-connector-line"></div>
+          </div>
+          <div class="arch-connector">
+            <div class="arch-connector-line"></div>
+            <span class="arch-connector-label">Peer-to-peer connections</span>
+            <div class="arch-connector-line"></div>
+          </div>
+          <div class="arch-mid">
+            <div>
+              <div class="arch-mid-name">Urban Web</div>
+              <div class="arch-mid-badge" style="text-align:left;margin-top:4px">A shared open standard</div>
             </div>
-            <div class="arch-mid">
-              <div>
-                <div class="arch-mid-name">Urban Web</div>
-                <div class="arch-mid-badge" style="text-align:left;margin-top:4px">A shared open standard</div>
-              </div>
-              <div class="arch-mid-badge">Owned by no one.<br>Open to everyone.</div>
-            </div>
-            <div class="arch-connector">
-              <div class="arch-connector-line"></div>
-              <span class="arch-connector-label">Built on</span>
-              <div class="arch-connector-line"></div>
-            </div>
-            <div class="arch-bot">
-              <div class="arch-bot-label">Foundation</div>
-              <div class="arch-bot-name">The NFH Fabric</div>
-              <div class="arch-bot-desc">Global decentralised infrastructure for open peer-to-peer value exchange.</div>
-            </div>
+            <div class="arch-mid-badge">Owned by no one.<br>Open to everyone.</div>
+          </div>
+          <div class="arch-connector">
+            <div class="arch-connector-line"></div>
+            <span class="arch-connector-label">On-fabric offerings</span>
+            <div class="arch-connector-line"></div>
+          </div>
+          <div class="arch-offerings">
+            <a href="https://vouch.finance" target="_blank" rel="noopener" class="arch-offering">
+              <span class="arch-offering-tag">Value</span>
+              <div class="arch-offering-name">Vouch Finance</div>
+              <div class="arch-offering-desc">Purpose-bound value — directed to outcomes</div>
+            </a>
+            <a href="https://pincer.network" target="_blank" rel="noopener" class="arch-offering">
+              <span class="arch-offering-tag">Trust</span>
+              <div class="arch-offering-name">Pincer</div>
+              <div class="arch-offering-desc">Cryptographic guarantees — settled on proof</div>
+            </a>
+          </div>
+          <div class="arch-connector">
+            <div class="arch-connector-line"></div>
+            <span class="arch-connector-label">Built on</span>
+            <div class="arch-connector-line"></div>
+          </div>
+          <div class="arch-bot">
+            <div class="arch-bot-label">Foundation</div>
+            <div class="arch-bot-name">The NFH Fabric</div>
+            <div class="arch-bot-desc">Global decentralised infrastructure for open peer-to-peer value exchange.</div>
           </div>
         </div>
       </div>
-      <div class="nfh-callout">
-        <p>Urban Web is built on the NFH Fabric, a decentralised global infrastructure for open peer-to-peer value exchange.</p>
-        <a href="https://docs.nfh.global" target="_blank" rel="noopener">docs.nfh.global →</a>
+    </div>
+    <div class="nfh-callout">
+      <p>Urban Web is built on the NFH Fabric, a decentralised global infrastructure for open peer-to-peer value exchange.</p>
+      <a href="https://docs.nfh.global" target="_blank" rel="noopener">docs.nfh.global →</a>
+    </div>
+    <div style="max-width:var(--max);margin:40px auto 0;padding:0 48px;">
+      <a href="use-cases-c40-preview.html" class="btn-primary">Explore use cases →</a>
+    </div>
+  </section>
+
+  <!-- SECTION 2: HOW IT WORKS -->
+  <section class="how-section">
+    <div class="how-inner">
+      <div class="how-header">
+        <h2>Four ideas.<br>One fundamental shift.</h2>
+        <p>Every network that changed the world worked this way.</p>
       </div>
-      <div style="max-width:var(--max);margin:40px auto 0;padding:0 48px;">
+      <div class="statement">
+        <div class="stmt-text">
+          <div class="stmt-num">01</div>
+          <div class="stmt-headline">Join once.</div>
+          <p class="stmt-body">A single connection to Urban Web makes any mobility service immediately reachable by every other service on the network. It connects to a shared layer, not individual partners.</p>
+        </div>
+        <div class="stmt-canvas"><canvas class="how-canvas" id="howCanvas1"></canvas></div>
+      </div>
+      <div class="statement statement--flip">
+        <div class="stmt-text">
+          <div class="stmt-num">02</div>
+          <div class="stmt-headline">Reach everything.</div>
+          <p class="stmt-body">New services become available across the ecosystem the moment they join.</p>
+        </div>
+        <div class="stmt-canvas"><canvas class="how-canvas" id="howCanvas2"></canvas></div>
+      </div>
+      <div class="statement">
+        <div class="stmt-text">
+          <div class="stmt-num">03</div>
+          <div class="stmt-headline">Grow beyond mobility.</div>
+          <p class="stmt-body">As more services join, the city's mobility layer becomes part of a broader network of commerce, logistics, energy and more.</p>
+        </div>
+        <div class="stmt-canvas"><canvas class="how-canvas" id="howCanvas3"></canvas></div>
+      </div>
+      <div class="statement statement--flip">
+        <div class="stmt-text">
+          <div class="stmt-num">04</div>
+          <div class="stmt-headline">Nothing in the middle.</div>
+          <p class="stmt-body">Urban Web defines how services talk. Like TCP/IP, it sits beneath every connection it enables.</p>
+        </div>
+        <div class="stmt-canvas"><canvas class="how-canvas" id="howCanvas4"></canvas></div>
+      </div>
+      <div class="how-cta">
         <a href="use-cases-c40-preview.html" class="btn-primary">Explore use cases →</a>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- TAB 2: HOW -->
-  <div class="tab-panel" id="tab-how">
-    <div class="how-section">
-      <div class="how-inner">
-        <div class="how-header">
-          <h2>Four ideas.<br>One fundamental shift.</h2>
-          <p>Every network that changed the world worked this way.</p>
+  <!-- SECTION 3: WHAT IT ENABLES -->
+  <section class="enables-section">
+    <div class="enables-inner">
+      <div class="enables-header">
+        <span class="eyebrow" style="color:var(--blue)">What it enables</span>
+        <h2>Not just what<br>you build today.</h2>
+        <p>The value of open infrastructure is what others build on it — without asking permission.</p>
+      </div>
+      <div class="enables-list">
+        <div class="enables-list-item">
+          <span class="enables-item-label">What nobody predicted</span>
+          <p>Open layers create conditions for solutions nobody designed — including AI-native interfaces that discover, transact, and coordinate across a city in real time.</p>
         </div>
-        <div class="statement">
-          <div class="stmt-text">
-            <div class="stmt-num">01</div>
-            <div class="stmt-headline">Join once.</div>
-            <p class="stmt-body">A single connection to Urban Web makes any mobility service immediately reachable by every other service on the network. It connects to a shared layer, not individual partners.</p>
-          </div>
-          <div class="stmt-canvas"><canvas class="how-canvas" id="howCanvas1"></canvas></div>
+        <div class="enables-list-item">
+          <span class="enables-item-label">Every new mode, already connected</span>
+          <p>Autonomous vehicles, urban aviation, and energy-as-transport join the same layer without rebuilding the connections. The infrastructure grows with the city, not behind it.</p>
         </div>
-        <div class="statement statement--flip">
-          <div class="stmt-text">
-            <div class="stmt-num">02</div>
-            <div class="stmt-headline">Reach everything.</div>
-            <p class="stmt-body">New services become available across the ecosystem the moment they join.</p>
-          </div>
-          <div class="stmt-canvas"><canvas class="how-canvas" id="howCanvas2"></canvas></div>
-        </div>
-        <div class="statement">
-          <div class="stmt-text">
-            <div class="stmt-num">03</div>
-            <div class="stmt-headline">Grow beyond mobility.</div>
-            <p class="stmt-body">As more services join, the city’s mobility layer becomes part of a broader network of commerce, logistics, energy and more.</p>
-          </div>
-          <div class="stmt-canvas"><canvas class="how-canvas" id="howCanvas3"></canvas></div>
-        </div>
-        <div class="statement statement--flip">
-          <div class="stmt-text">
-            <div class="stmt-num">04</div>
-            <div class="stmt-headline">Nothing in the middle.</div>
-            <p class="stmt-body">Urban Web defines how services talk. Like TCP/IP, it sits beneath every connection it enables.</p>
-          </div>
-          <div class="stmt-canvas"><canvas class="how-canvas" id="howCanvas4"></canvas></div>
-        </div>
-        <div class="how-cta">
-          <a href="use-cases-c40-preview.html" class="btn-primary">Explore use cases →</a>
+        <div class="enables-list-item">
+          <span class="enables-item-label">Compounding value</span>
+          <p>Every new service that joins increases the value for every other service already connected. The open standard gets more powerful the more it is used.</p>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- TAB 3: POSSIBLE -->
-  <div class="tab-panel" id="tab-possible">
-    <div class="possible-section">
-      <div class="possible-inner">
-        <div class="possible-header">
-          <h2>Not just what you build today.<br>What others build tomorrow.</h2>
-          <p>The value of open infrastructure is not what you build on it. It's what others build, without asking permission.</p>
+  <!-- SECTION 4: ON THE FABRIC -->
+  <section class="fabric-section">
+    <div class="fabric-inner">
+      <div class="fabric-intro">
+        <span class="eyebrow">On the NFH Fabric</span>
+        <h2>Urban Web connects.<br>Vouch directs.<br>Pincer guarantees.</h2>
+        <p>Urban Web is part of a complete open infrastructure stack from NFH. Vouch adds purpose-bound value — directing funds and benefits to the right recipients and outcomes. Pincer adds cryptographic trust — guaranteeing every transaction settles the moment proof conditions are met.</p>
+      </div>
+      <div class="fabric-grid">
+        <div class="fabric-card">
+          <div class="fabric-card-eyebrow"><img src="brand_assets/vouch-logo-white.png" alt="Vouch Finance" class="fabric-logo fabric-logo--vouch"></div>
+          <div class="fabric-card-tagline">Purpose-bound value for any programme. Money, credit, or equity issued with embedded rules — directed to the right recipient, usable in the right context, tracked to the right outcome.</div>
+          <div class="fabric-card-points">
+            <div class="fabric-card-point">Employer mobility allowances spendable only on qualifying modes, automatically enforced across every Urban Web-connected operator — no bilateral agreements with providers needed</div>
+            <div class="fabric-card-point">Government mobility subsidies bound to shared transit, redeemable across every operator in the city — open, not locked to a single provider</div>
+            <div class="fabric-card-point">Carbon incentive credits that release only when a qualifying, low-carbon journey is verified by Urban Web data</div>
+          </div>
+          <a href="https://vouch.finance" target="_blank" rel="noopener" class="fabric-card-link">vouch.finance →</a>
         </div>
-        <div class="possible-grid">
-          <div class="possible-item">
-            <div class="possible-item-num">01</div>
-            <span class="possible-item-label">The obvious unlock</span>
-            <p>When every mobility service in a city speaks the same standard, any two of them can work together without a bilateral agreement, a custom build, or a procurement cycle.</p>
+        <div class="fabric-card">
+          <div class="fabric-card-eyebrow"><img src="brand_assets/pincer-logo-white.png" alt="Pincer" class="fabric-logo fabric-logo--pincer"></div>
+          <div class="fabric-card-tagline">Cryptographic trust and guarantee envelopes for any transaction. A seal that enforces itself and settles the moment proof conditions are met — no intermediary, no delay.</div>
+          <div class="fabric-card-points">
+            <div class="fabric-card-point">Fleet financing that releases in verified tranches as operators meet milestones on Urban Web — vehicles credentialed, routes active, journeys completed</div>
+            <div class="fabric-card-point">Booking guarantees for idle fleet marketplaces — payment locks at confirmation and releases automatically when the route is completed, with no intermediary needed</div>
+            <div class="fabric-card-point">Energy-to-grid settlement on smart meter proof — electric bus fleets trade energy without a utility intermediary, payment instant and atomic</div>
           </div>
-          <div class="possible-item">
-            <div class="possible-item-num">02</div>
-            <span class="possible-item-label">The deeper point</span>
-            <p>The more important aspect is what nobody planned. When everything sits on a shared open layer, the conditions exist for solutions that nobody has thought of yet, including the next generation of AI-native interfaces that discover, transact, and coordinate across a city.</p>
-          </div>
-          <div class="possible-item">
-            <div class="possible-item-num">03</div>
-            <span class="possible-item-label">For the city</span>
-            <p>Cities gain a real-time view of how their mobility network is actually being used. Not service by service, but across the whole. Policy, investment, and infrastructure decisions made with data that has never existed before.</p>
-          </div>
-          <div class="possible-item">
-            <div class="possible-item-num">04</div>
-            <span class="possible-item-label">For the future</span>
-            <p>New mobility categories like autonomous vehicles, urban aviation, and energy-as-transport join the same layer without rebuilding the connections. The infrastructure grows with the city, not behind it.</p>
-          </div>
-        </div>
-        <div style="margin-top:56px;">
-          <a href="use-cases-c40-preview.html" class="btn-primary">Explore use cases →</a>
+          <a href="https://pincer.network" target="_blank" rel="noopener" class="fabric-card-link">pincer.network →</a>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- PARTNERS -->
   <section class="partners" id="partners">
@@ -397,18 +441,6 @@
   </footer>
 
   <script>
-  /* Tabs */
-  (function(){
-    const btns=document.querySelectorAll('.tab-btn'),panels=document.querySelectorAll('.tab-panel');
-    btns.forEach(btn=>btn.addEventListener('click',()=>{
-      const tab=btn.dataset.tab;
-      btns.forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
-      panels.forEach(p=>p.classList.toggle('active',p.id==='tab-'+tab));
-      if(tab==='how') setTimeout(initHowCanvases,50);
-      else stopCanvases();
-    }));
-  })();
-
   /* Contact */
   (function(){
     const form=document.getElementById('contactForm'),success=document.getElementById('formSuccess');
@@ -416,7 +448,7 @@
     form.addEventListener('submit',e=>{e.preventDefault();form.style.display='none';success.style.display='block';});
   })();
 
-  /* ── Canvas utilities (from production) ── */
+  /* Canvas utilities */
   function setupCanvas(el){
     if(!el)return null;
     const ctx=el.getContext('2d');
@@ -666,6 +698,16 @@
     drawC3(document.getElementById('howCanvas3'));
     drawC4(document.getElementById('howCanvas4'));
   }
+
+  /* Start canvases when How section scrolls into view */
+  const howSec=document.querySelector('.how-section');
+  if(howSec){
+    new IntersectionObserver(entries=>{
+      if(entries[0].isIntersecting) initHowCanvases();
+      else stopCanvases();
+    },{threshold:0.05}).observe(howSec);
+  }
+
   </script>
 </body>
 </html>

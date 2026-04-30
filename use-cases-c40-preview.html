@@ -60,7 +60,7 @@
 
     /* PANEL */
     .uc-panel{overflow:hidden;max-height:0;transition:max-height 0.52s cubic-bezier(0.4,0,0.2,1);}
-    .uc-panel.open{max-height:2200px;}
+    .uc-panel.open{max-height:2800px;}
     .uc-panel-body{border-top:1px solid rgba(0,0,0,0.07);background:#f7f7f6;padding:52px 48px 68px;}
     .uc-panel-inner{max-width:var(--max);margin:0 auto;}
 
@@ -82,6 +82,8 @@
     .uc-outcome-block{margin-top:24px;background:#fff;border-left:3px solid var(--uc-color,var(--blue));padding:16px 18px;}
     .uc-outcome-label{font-size:9px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--uc-color,var(--blue));margin-bottom:6px;}
     .uc-outcome-block p{font-size:13px;font-weight:300;color:#555;line-height:1.65;}
+    .brand-link{color:var(--uc-color,var(--blue));text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px;opacity:0.9;transition:opacity 0.15s;}
+    .brand-link:hover{opacity:1;}
 
     /* ── DEMO STYLES ── */
     .demo-wrap{background:var(--dark);border-radius:0;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 4px 28px rgba(0,0,0,0.24);}
@@ -99,10 +101,10 @@
     .d-prev:disabled{opacity:0.28;cursor:not-allowed;}
     .d-next{background:#0078CE;border-color:#0078CE;color:#fff;}
     .d-next:disabled{opacity:0.5;cursor:not-allowed;}
-    .demo-phone-wrap{display:flex;justify-content:center;padding:16px;}
-    .demo-phone{max-width:230px;width:100%;background:#0d1a2a;border-radius:20px;padding:12px 6px;box-shadow:0 2px 12px rgba(0,0,0,0.4);}
-    .demo-phone-notch{width:52px;height:9px;background:#1a2a3a;border-radius:20px;margin:0 auto 8px;}
-    .demo-phone-screen{background:#fff;border-radius:10px;overflow:hidden;min-height:300px;}
+    .demo-phone-wrap{display:flex;justify-content:center;padding:8px;}
+    .demo-phone{max-width:220px;width:100%;background:#0d1a2a;border-radius:18px;padding:10px 6px;box-shadow:0 2px 12px rgba(0,0,0,0.4);}
+    .demo-phone-notch{width:48px;height:8px;background:#1a2a3a;border-radius:20px;margin:0 auto 7px;}
+    .demo-phone-screen{background:#fff;border-radius:9px;overflow:hidden;min-height:260px;}
     .demo-split{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px;min-height:280px;}
     .demo-pane{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;}
     .demo-pane-label{font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.28);padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.07);flex-shrink:0;}
@@ -162,6 +164,26 @@
     .footer-nav a:hover{color:rgba(255,255,255,0.6);}
     .footer-bottom{max-width:var(--max);margin:0 auto;padding:18px 48px 0;border-top:1px solid rgba(255,255,255,0.06);font-size:12px;color:rgba(255,255,255,0.15);}
 
+    /* ON THE FABRIC SECTION */
+    .fabric-section{background:#050d18;padding:96px 0;border-top:1px solid rgba(0,120,206,0.18);}
+    .fabric-inner{max-width:var(--max);margin:0 auto;padding:0 48px;}
+    .fabric-intro{margin-bottom:64px;border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:56px;}
+    .fabric-intro .eyebrow{color:var(--blue);}
+    .fabric-intro h2{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(44px,6vw,80px);line-height:0.92;color:#fff;margin-bottom:20px;}
+    .fabric-intro p{font-size:16px;font-weight:300;color:rgba(255,255,255,0.45);max-width:580px;line-height:1.75;}
+    .fabric-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid rgba(255,255,255,0.08);}
+    .fabric-card{padding:48px;border-right:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;}
+    .fabric-card:last-child{border-right:none;}
+    .fabric-card-eyebrow{margin-bottom:24px;}
+    .fabric-logo{height:44px;width:auto;display:block;opacity:0.88;}
+    .fabric-card-name{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(36px,4vw,56px);line-height:0.9;color:#fff;margin-bottom:16px;}
+    .fabric-card-tagline{font-size:14px;font-weight:300;color:rgba(255,255,255,0.55);line-height:1.75;margin-bottom:32px;border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:24px;}
+    .fabric-card-points{display:flex;flex-direction:column;gap:16px;flex:1;margin-bottom:32px;}
+    .fabric-card-point{font-size:13px;font-weight:300;color:rgba(255,255,255,0.48);line-height:1.75;}
+    .fabric-card-link{font-size:12px;font-weight:500;letter-spacing:0.06em;color:var(--blue);display:inline-flex;align-items:center;gap:4px;transition:color 0.15s;align-self:flex-start;}
+    .fabric-card-link:hover{color:#5bb3f5;}
+
+
     @media(max-width:900px){
       .nav{padding:0 24px;}.nav-links{display:none;}
       .page-header{padding:120px 24px 56px;}
@@ -178,6 +200,9 @@
       .footer-inner{padding:0 24px;flex-direction:column;gap:28px;}
       .footer-nav{align-items:flex-start;}.footer-bottom{padding:18px 24px 0;}
       .demo-split{grid-template-columns:1fr;}
+      .fabric-grid{grid-template-columns:1fr;}
+      .fabric-inner{padding:0 24px;}
+      .fabric-card{padding:32px 24px;}
     }
   </style>
 </head>
@@ -235,12 +260,13 @@
                 <h3>A commuter's morning</h3>
                 <div class="uc-steps">
                   <div class="uc-step"><div class="uc-step-num">01</div><div class="uc-step-text"><strong>One place to start.</strong> A commuter opens a single app — or asks an AI assistant — to plan their journey from home to office.</div></div>
-                  <div class="uc-step"><div class="uc-step-num">02</div><div class="uc-step-text"><strong>Any mode, any provider.</strong> The route combines a micro-mobility leg, a transit connection, and a ride-hail pickup — booked and paid for in one flow.</div></div>
+                  <div class="uc-step"><div class="uc-step-num">02</div><div class="uc-step-text"><strong>Any mode, any provider.</strong> The route combines a micro-mobility leg, a transit connection, and a ride-hail pickup — booked and paid for in one flow, across three separate operators.</div></div>
                   <div class="uc-step"><div class="uc-step-num">03</div><div class="uc-step-text"><strong>No friction, no switching.</strong> Every service is reachable because they all share the same open layer. The traveller never needs to know it exists.</div></div>
+                  <div class="uc-step"><div class="uc-step-num">04</div><div class="uc-step-text"><strong>Every operator paid on delivery.</strong> The full fare across all operators is held in <a href="https://pincer.network" target="_blank" rel="noopener" class="brand-link">Pincer</a> escrow from the moment of booking. As each leg completes, that operator is paid. If a leg fails — the bus doesn't show, the driver cancels — that portion returns automatically. No claims form. No waiting.</div></div>
                 </div>
                 <div class="uc-outcome-block">
                   <div class="uc-outcome-label">The shift</div>
-                  <p>Mobility becomes invisible — not because the services merged, but because the infrastructure beneath them is open. The city moves; the individual just moves with it.</p>
+                  <p>Mobility becomes invisible — not because the services merged, but because the infrastructure beneath them is open. Three operators, one flow, every leg guaranteed. The city moves; the individual just moves with it.</p>
                 </div>
               </div>
               <div id="demo-individual"></div>
@@ -273,13 +299,14 @@
               <div class="uc-scenario">
                 <h3>An employer and their commuters</h3>
                 <div class="uc-steps">
-                  <div class="uc-step"><div class="uc-step-num">01</div><div class="uc-step-text"><strong>Mobility as a benefit.</strong> An employer offers a sustainable commuting allowance — spendable across any connected service, not locked to a single provider.</div></div>
-                  <div class="uc-step"><div class="uc-step-num">02</div><div class="uc-step-text"><strong>Real emissions data.</strong> Because Urban Web tracks the full journey — not just the segment — the employer sees actual carbon impact across all modes.</div></div>
-                  <div class="uc-step"><div class="uc-step-num">03</div><div class="uc-step-text"><strong>Collective reporting.</strong> Multiple employers in a district pool mobility data to demonstrate climate progress — without sharing individual user information.</div></div>
+                  <div class="uc-step"><div class="uc-step-num">01</div><div class="uc-step-text"><strong>Mobility as a benefit.</strong> An employer issues a commuting allowance through <a href="https://vouch.finance" target="_blank" rel="noopener" class="brand-link">Vouch Finance</a> — purpose-bound credit spendable across any Urban Web-connected service, automatically restricted to sustainable modes, capped monthly, and expiring if unused. No agreements with individual operators. No payment infrastructure to build.</div></div>
+                  <div class="uc-step"><div class="uc-step-num">02</div><div class="uc-step-text"><strong>Real emissions data.</strong> Because Urban Web tracks the full journey across operators — not just a single segment — the employer sees actual carbon impact. Not estimated from surveys. Verified from trips.</div></div>
+                  <div class="uc-step"><div class="uc-step-num">03</div><div class="uc-step-text"><strong>Carbon rewards that verify themselves.</strong> When an employee chooses transit over a car, Urban Web verifies the journey and a climate credit releases automatically — purpose-bound to future mobility costs, encouraging the habit rather than rewarding a one-off. A city or climate fund can administer the same logic across an entire district.</div></div>
+                  <div class="uc-step"><div class="uc-step-num">04</div><div class="uc-step-text"><strong>Collective reporting.</strong> Multiple employers pool verified mobility data to demonstrate district-level climate progress — without sharing individual user information. A real evidence base, built from trips rather than surveys.</div></div>
                 </div>
                 <div class="uc-outcome-block">
                   <div class="uc-outcome-label">The shift</div>
-                  <p>Sustainability commitments become measurable because the data finally exists. Companies don't need to negotiate with individual providers — they connect once and see everything.</p>
+                  <p>The employer becomes an issuer of mobility value — without building any payment infrastructure. Urban Web provides the verified journey data. Vouch turns it into programmable benefit and reward. Climate commitments stop being aspirational and become measurable.</p>
                 </div>
               </div>
               <div id="demo-organisation"></div>
@@ -335,7 +362,7 @@
                   <h3>Idle vehicles, active city</h3>
                   <div class="uc-steps">
                     <div class="uc-step"><div class="uc-step-num">01</div><div class="uc-step-text"><strong>Hidden capacity revealed.</strong> School buses, corporate coaches, and community vehicles sit idle for most of the day — invisible to the city's transit planners.</div></div>
-                    <div class="uc-step"><div class="uc-step-num">02</div><div class="uc-step-text"><strong>Listed once, available everywhere.</strong> Fleet owners publish their available windows to the shared layer. Any transit operator or city service can now discover and book them.</div></div>
+                    <div class="uc-step"><div class="uc-step-num">02</div><div class="uc-step-text"><strong>Listed once, available everywhere.</strong> Fleet owners publish their available windows to the shared layer. Any transit operator or city service can now discover and book them. <a href="https://pincer.network" target="_blank" rel="noopener" class="brand-link">Pincer</a> escrow locks the payment at booking — the school commits its bus knowing the fare is guaranteed, even to an operator it has never worked with.</div></div>
                     <div class="uc-step"><div class="uc-step-num">03</div><div class="uc-step-text"><strong>More routes, zero procurement.</strong> Route gaps close using vehicles that already exist. The city gains capacity without buying a single new vehicle.</div></div>
                   </div>
                   <div class="uc-outcome-block">
@@ -373,6 +400,7 @@
             <div class="sub-tabs">
               <button class="sub-tab active" data-sub="credentials">Portable Credentials</button>
               <button class="sub-tab" data-sub="energy">Energy Transition</button>
+              <button class="sub-tab" data-sub="congestion">Demand Management</button>
             </div>
             <div class="sub-panel" data-sub="credentials">
               <div class="uc-content-grid">
@@ -382,10 +410,11 @@
                     <div class="uc-step"><div class="uc-step-num">01</div><div class="uc-step-text"><strong>Skills that travel.</strong> A transit driver's qualifications, certifications, and employment history are verified and stored on Urban Web — not with any single employer.</div></div>
                     <div class="uc-step"><div class="uc-step-num">02</div><div class="uc-step-text"><strong>Instant discovery.</strong> When a driver changes operators or cities, their full record is available immediately. No certificates to chase. No delays in hiring.</div></div>
                     <div class="uc-step"><div class="uc-step-num">03</div><div class="uc-step-text"><strong>Cities see the picture.</strong> Planners see aggregate workforce readiness in real time — EV certifications, gaps, training needs — before they become crises.</div></div>
+                    <div class="uc-step"><div class="uc-step-num">04</div><div class="uc-step-text"><strong>Benefits that follow the credential.</strong> A driver's welfare package — healthcare cover, education credits, fuel allowance — is issued through <a href="https://vouch.finance" target="_blank" rel="noopener" class="brand-link">Vouch Finance</a>, linked to their verified Urban Web credential. When they switch operators, the benefit moves with them. EV upskilling credits are bound to accredited training providers and release only when certification is verified on Urban Web — a city's investment in the transition, with the condition built into the money.</div></div>
                   </div>
                   <div class="uc-outcome-block">
                     <div class="uc-outcome-label">The shift</div>
-                    <p>The workforce becomes visible. Cities that commit to electric fleets can now see whether the talent to drive them exists — and act before the vehicles arrive.</p>
+                    <p>The workforce becomes visible. Cities that commit to electric fleets can see whether the talent to drive them exists — and fund the upskilling before the vehicles arrive. Drivers who move between operators carry their full record and their full benefit package with them.</p>
                   </div>
                 </div>
                 <div id="demo-city-credentials"></div>
@@ -406,6 +435,24 @@
                   </div>
                 </div>
                 <div id="demo-city-energy"></div>
+              </div>
+            </div>
+            <div class="sub-panel" data-sub="congestion" style="display:none">
+              <div class="uc-content-grid">
+                <div class="uc-scenario">
+                  <h3>A city redirecting peak-hour demand</h3>
+                  <div class="uc-steps">
+                    <div class="uc-step"><div class="uc-step-num">01</div><div class="uc-step-text"><strong>The city finally sees the whole picture.</strong> Urban Web shows every operator, every mode, every route simultaneously — not service by service, but the whole network at once. When a corridor saturates, the city can act on what is actually happening, not what a survey said last year.</div></div>
+                    <div class="uc-step"><div class="uc-step-num">02</div><div class="uc-step-text"><strong>Incentives that redirect demand in real time.</strong> When congestion hits, the city issues mode-substitution credits through <a href="https://vouch.finance" target="_blank" rel="noopener" class="brand-link">Vouch Finance</a> — automatically activated, bound to the alternative mode, valid for that window only. Off-peak journeys earn more. New transit corridors get launch-period credits. The city shapes demand without touching any operator's fare structure.</div></div>
+                    <div class="uc-step"><div class="uc-step-num">03</div><div class="uc-step-text"><strong>Budget that only pays for results.</strong> The incentive budget is committed to <a href="https://pincer.network" target="_blank" rel="noopener" class="brand-link">Pincer</a> escrow. It releases only when Urban Web verifies the mode switch happened. Commuters see the guaranteed credit before they decide. The city's budget pays for verified behaviour, not intentions.</div></div>
+                    <div class="uc-step"><div class="uc-step-num">04</div><div class="uc-step-text"><strong>Records that earn better terms.</strong> Commuters who consistently choose sustainable modes build a verified proof record. Better credit rates follow automatically over time — a direct economic return on consistent behaviour, with no platform required to grant it.</div></div>
+                  </div>
+                  <div class="uc-outcome-block">
+                    <div class="uc-outcome-label">The shift</div>
+                    <p>Congestion pricing takes money away. This gives value back — targeted, provable, and measurable. Urban Web sees the behaviour. Vouch shapes the incentive. Pincer proves it happened. Every pound of the city's budget produces a verified trip.</p>
+                  </div>
+                </div>
+                <div id="demo-city-congestion"></div>
               </div>
             </div>
           </div>
@@ -511,23 +558,38 @@
         card(lbl('How are you getting there?')+`<div style="font-size:11px;color:${C.t2};line-height:1.55;margin-bottom:5px">Journey options from every operator in your city are ready.</div><div style="font-size:12px;font-weight:600;color:${C.blue}">See journey options →</div>`,C.blue)
       ),
       hdr('Getting to Powerhouse Arena · 20:00')+body(
-        `<div style="font-size:9px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:${C.t3}">Best options tonight</div>`+
-        card(`<div style="display:flex;justify-content:space-between;margin-bottom:7px"><div style="font-size:10px;font-weight:600;color:${C.blue}">Recommended · 38 min</div><div style="font-size:14px;font-weight:700;color:${C.text}">€2.40</div></div><div style="display:flex;flex-direction:column;gap:4px;margin-bottom:8px"><div style="display:flex;align-items:center;gap:6px"><span style="background:${C.blue};color:#fff;padding:1px 6px;font-size:8px;font-weight:700;border-radius:2px">M3</span><span style="font-size:11px;color:${C.text}">Metro · Central → Arena · 6 stops</span></div></div>`+btn('Book this journey',C.blue),C.blue)+
-        `<div style="font-size:10px;color:${C.t3};text-align:center;margin-top:4px">Options from Metro, CityBus and 3 others</div>`
+        `<div style="font-size:9px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:${C.t3}">Recommended · 44 min · €12.40</div>`+
+        card(
+          `<div style="display:flex;flex-direction:column;gap:5px;margin-bottom:8px">`+
+          `<div style="display:flex;align-items:center;gap:6px"><span style="background:${C.blue};color:#fff;padding:1px 6px;font-size:8px;font-weight:700;border-radius:2px">M3</span><span style="font-size:11px;color:${C.text}">Metro · Central → Kings Cross · 6 stops</span></div>`+
+          `<div style="display:flex;align-items:center;gap:6px"><span style="background:#4a5568;color:#fff;padding:1px 6px;font-size:8px;font-weight:700;border-radius:2px">47</span><span style="font-size:11px;color:${C.text}">Bus 47 · Kings Cross → Dock St · 3 stops</span></div>`+
+          `<div style="display:flex;align-items:center;gap:6px"><span style="background:${C.amber};color:#fff;padding:1px 6px;font-size:8px;font-weight:700;border-radius:2px">CAR</span><span style="font-size:11px;color:${C.text}">Ride-hail · Dock St → Arena · 4 min</span></div>`+
+          `</div>`+btn('Book — 3 operators, 1 checkout',C.blue)
+        ,C.blue)+
+        `<div style="font-size:10px;color:${C.t3};text-align:center;margin-top:4px">Options from Metro, CityBus, and 4 others</div>`
       ),
-      hdr('✓ You\'re all set')+body(
-        card(lbl('Event ticket')+`<div style="font-size:12px;font-weight:600;color:${C.text}">Jazzfest Night 2 · Section C</div><div style="font-size:11px;color:${C.t3}">Fri 14 Nov · 20:00</div>`,C.blue)+
-        card(lbl('Transit ticket',C.green)+`<div style="font-size:12px;font-weight:600;color:${C.text}">Metro M3 · 2 trips</div><div style="font-size:11px;color:${C.green};font-weight:600">Departs 19:14 · Arrives 19:52</div>`,C.green)+
-        chk('Departure reminder set · 19:05',C.green)+
-        `<div style="font-size:11px;color:${C.t3};text-align:center;line-height:1.7;margin-top:4px">One checkout. Two tickets.<br>No separate app. No extra step.</div>`
+      hdr('✓ Booking confirmed')+body(
+        card(lbl('Your journey · 3 operators')+
+          `<div style="display:flex;flex-direction:column;gap:4px">`+
+          `<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:${C.t3}">Metro M3</span><span style="color:${C.text}">Departs 19:12</span></div>`+
+          `<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:${C.t3}">Bus 47</span><span style="color:${C.text}">Departs 19:41</span></div>`+
+          `<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:${C.t3}">Ride-hail</span><span style="color:${C.green};font-weight:600">Arrives 20:06</span></div>`+
+          `</div>`
+        ,C.blue)+
+        card(lbl('Fare secured',C.green)+
+          row('Total','€12.40')+
+          row('Status','Held in escrow',C.green)+
+          `<div style="font-size:10px;color:${C.t3};line-height:1.55;margin-top:5px">Each operator is paid when their leg completes. If any leg fails, that portion returns to you automatically.</div>`
+        ,C.green)+
+        `<div style="font-size:10px;color:${C.t3};text-align:center;line-height:1.7;margin-top:4px">Departure reminder set · 19:05</div>`
       ),
     ],
 
     /* Organisation — split, 3 steps */
     organisation:[
-      {left:{lbl:'City Transport Authority',items:[sph.lbl('Modal shift target')+sph.row('2030 goal','35% on public transit')+sph.row('Current measurement','Unknown','#ff6b6b'),sph.note('Best available data: an annual survey. Most commute trips are invisible.')]},right:{lbl:'Employer — Meridian Group',items:[sph.lbl('ESG Commuting Report')+sph.row('Data quality','Estimated only','#D4782A')+sph.row('On transit (est.)','41%')+sph.row('Confidence','Low — survey based','#ff6b6b'),sph.note('No standard way to verify a single trip. Every operator uses a different format.')]}},
-      {left:{lbl:'Employer — Meridian Group',items:[sph.lbl('Green commute policy')+'<div style="margin:4px 0">'+sph.pill('Metro',C.blue)+sph.pill('Bus',C.blue)+sph.pill('Cycle',C.green)+'</div>'+sph.row('Reward','£1.20 / km')+sph.row('Applies to','All operators automatically'),sph.note('Published once. Every transit operator in the city picks it up automatically.')]},right:{lbl:'Any transit operator',items:[sph.lbl('Received from Urban Web')+sph.row('Policy source','Meridian Group')+sph.row('Status','Active — auto-enforced','#2A9E72')+sph.row('Operators covered','All (14 in city)'),sph.note('No bilateral agreement. No custom integration. One standard.')]}},
-      {left:{lbl:'Employee trip — live',items:[sph.lbl('Verified commute')+sph.row('Mode','Bus 47 · 6.1 km')+sph.row('Employer','Meridian Group')+sph.row('Credit awarded','£7.32','#2A9E72')+sph.row('Carbon offset','1.4 kg CO₂','#2A9E72')]},right:{lbl:'City Transport Authority',items:[sph.lbl('Modal shift — now visible')+sph.row('On public transit','48%','#2A9E72')+sph.row('Data quality','Verified trips')+sph.row('Employers reporting','312'),sph.note('Real evidence base. Built from trips, not surveys.')]}},
+      {left:{lbl:'Employer — Meridian Group',items:[sph.lbl('Mobility benefit policy (Vouch)')+sph.row('Credit per employee','£120 / month')+sph.row('Modes covered','Transit, micro-mobility, shared ride')+sph.row('Restricted','Ride-hail during peak hours','#ff6b6b')+sph.row('Cap','Auto-resets monthly · unused expires'),sph.note('Published once. Every Urban Web-connected operator picks it up — no bilateral agreements.')]},right:{lbl:'Employee — Alex K.',items:[sph.lbl('My mobility credit')+sph.row('Available this month','£120.00','#2A9E72')+sph.row('Spend on','Transit, cycle, shared ride')+sph.row('Not on','Ride-hail · Mon–Fri 07–09, 17–19','#ff6b6b'),sph.note('One credit, every eligible operator in the city. No separate apps or accounts.')]}},
+      {left:{lbl:'Alex K. — verified trip',items:[sph.lbl('Journey completed')+sph.row('Mode','Bus 47 · 6.1 km')+sph.row('Vouch credit used','£2.40')+sph.row('Policy check','Qualifying mode ✓','#2A9E72')+sph.row('CO₂ avoided','1.4 kg (verified)','#2A9E72'),sph.note('Urban Web verifies the full journey, not just the payment tap. Carbon impact measured, not estimated.')]},right:{lbl:'Carbon reward — auto-released',items:[sph.lbl('Outcome-triggered credit')+sph.row('Climate reward','£0.84 released','#2A9E72')+sph.row('Type','Purpose-bound — mobility only')+sph.row('Basis','Verified avoided car trip')+sph.row('Stackable','Yes — on top of base benefit','#2A9E72'),sph.note('Released when the journey is verified. Redeemable on future mobility — building the habit.')]}},
+      {left:{lbl:'Meridian Group — ESG dashboard',items:[sph.lbl('This quarter')+sph.row('Verified commute trips','3,847')+sph.row('CO₂ avoided','2.3 tonnes','#2A9E72')+sph.row('Data quality','Urban Web verified','#2A9E72')+sph.row('vs. last year (survey)','41% — estimated','#D4782A'),sph.note('Real numbers, not estimates. The data exists because the infrastructure does.')]},right:{lbl:'City Transport Authority',items:[sph.lbl('District-level view')+sph.row('Employers sharing data','312')+sph.row('On transit (verified)','48%','#2A9E72')+sph.row('Data quality','Verified trips — not surveys')+sph.row('Modal shift since 2022','+11 ppts','#2A9E72'),sph.note('No individual data shared. The city sees the aggregate — evidence for policy, without surveillance.')]}},
     ],
 
     /* Neighbourhood space — handled by parking canvas */
@@ -547,10 +609,17 @@
         chk('Revenue generated during idle hours',C.green)+
         `<div style="font-size:10px;color:${C.green};line-height:1.55;margin-top:4px">One connection. City-wide discoverability. No integration work.</div>`
       ),
-      hdr('Demand matched')+body(
-        card(`${lbl('Transit operator request')}${row('Route gap','Central → Tech Park · 09:15–11:00')}${row('Capacity needed','28 seats')}${row('Found via Urban Web','School bus fleet',C.green)}${row('Booked in','< 4 minutes',C.green)}`,C.green)+
-        btn('Capacity confirmed',C.green)+
-        `<div style="font-size:10px;color:${C.t3};line-height:1.55;margin-top:6px">No new vehicle. No procurement. No contract negotiation.</div>`
+      hdr('Route gap closed')+body(
+        card(`${lbl('Booking confirmed')}${row('Route','Central → Tech Park · 09:15')}${row('Gap unserved for','11 months')}${row('Vehicle found','School bus · 28 seats')}${row('Time to book','< 4 minutes',C.green)}`,C.green)+
+        chk('No new vehicle. No procurement. No contract.',C.green)+
+        chk('Live within 48 hours of booking',C.green)+
+        `<div style="font-size:10px;color:${C.t3};line-height:1.55;margin-top:6px">An 11-month route gap closed in under 4 minutes — using a vehicle the city already had.</div>`
+      ),
+      hdr('Payment secured')+body(
+        card(`${lbl('Escrow locked at booking')}${row('Payable to','Westside School Fleet')}${row('Amount','£340')}${row('Escrow status','Active — held on proof',C.green)}${row('Releases on','Route completion')}`,C.green)+
+        chk('School: bus committed, payment guaranteed',C.green)+
+        chk('Operator: route locked, vehicle guaranteed',C.green)+
+        `<div style="font-size:10px;color:${C.t3};line-height:1.55;margin-top:4px">Neither party can be left empty-handed. No prior relationship needed.</div>`
       ),
       hdr('City mobility expanded')+body(
         `<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">`+
@@ -579,6 +648,12 @@
         card(`${row('EV certified drivers','2,840',C.green)}${row('EV fleet target by 2027','4,200')}${row('Skills gap','1,360 drivers',C.amber)}${row('Training institutes linked','14')}`,C.purple)+
         `<div style="font-size:10px;color:${C.t3};line-height:1.55;margin-top:4px">The city sees its workforce gap before it becomes a crisis — not after.</div>`
       ),
+      hdr('Driver welfare · Marcus B.')+body(
+        card(`${lbl('Benefit package — Vouch Finance')}${row('Healthcare cover','Active — any operator',C.green)}${row('EV upskilling credit','£150 available',C.green)}${row('Fuel allowance','£40 / month',C.green)}${row('Linked to','Urban Web credential',C.purple)}`,C.purple)+
+        chk('Portable across every Urban Web operator',C.green)+
+        chk('EV credit bound to accredited providers only',C.green)+
+        `<div style="font-size:10px;color:${C.t3};line-height:1.55;margin-top:4px">When Marcus switches operators, nothing changes. The benefit is his — linked to his credential, not his employer.</div>`
+      ),
     ],
 
     /* Energy Transition — split, 3 steps */
@@ -587,19 +662,27 @@
       {left:{lbl:'Electric bus fleet · Overnight',items:[sph.lbl('Vehicle-to-grid export')+sph.row('Fleet size','42 buses')+sph.row('Grid export window','23:00 – 05:00')+sph.row('Energy exported','1,240 kWh')+sph.row('Revenue generated','£186','#2A9E72')]},right:{lbl:'City grid operator',items:[sph.lbl('Peak demand managed')+sph.row('Buses contributing','42 / 42')+sph.row('Grid stress avoided','Yes','#2A9E72')+sph.row('Peaker plant avoided','Yes','#2A9E72'),sph.note('The fleet stabilises the grid and generates income while parked.')]}},
       {left:{lbl:'City energy authority',items:[sph.lbl('Investment guided by real data')+sph.row('Chargers needed: East','42 (actual usage)')+sph.row('Chargers needed: West','18 (actual usage)')+sph.row('Estimated (old method)','60 (both areas)'),sph.note('Infrastructure built where it\'s actually needed. Not where demand was estimated.')]},right:{lbl:'Solar building · Office park',items:[sph.lbl('Energy export')+sph.row('Solar generated','340 kWh today')+sph.row('Consumed on-site','180 kWh')+sph.row('Exported to grid','160 kWh','#2A9E72')+sph.row('Revenue','£28.80','#2A9E72')]}},
     ],
+
+    /* Demand Management / Congestion — split, 3 steps */
+    congestion:[
+      {left:{lbl:'City transport authority — today',items:[sph.lbl('Peak hour visibility')+sph.row('A12 corridor','Congested — no detail','#ff6b6b')+sph.row('Mode split data','Annual survey only','#ff6b6b')+sph.row('Real-time view across operators','None','#ff6b6b'),sph.note('One operator at a time. No whole-network view. No basis for acting as congestion builds.')]},right:{lbl:'Demand management budget',items:[sph.lbl('Current approach')+sph.row('Budget','£2.4M / year')+sph.row('Disbursed','Quarterly, in advance','#ff6b6b')+sph.row('Tied to verified outcomes','No','#ff6b6b')+sph.row('Adjustable in real time','No','#ff6b6b'),sph.note('Paid before behaviour changes. No targeting, no proof, no way to know if it worked.')]}},
+      {left:{lbl:'City — Urban Web view · 08:31',items:[sph.lbl('A12 — congestion confirmed')+sph.row('Live mode split','Across all operators','#2A9E72')+sph.row('Vouch credit issued','£1.40 · Tube Line 2 only')+sph.row('Bound to','Alternative mode — this window')+sph.row('Budget committed','Only on verified switch','#2A9E72'),sph.note('Costs nothing until Urban Web confirms a switch. No behaviour = no spend.')]},right:{lbl:'Commuter · Priya K. — 08:31',items:[sph.lbl('Received on her app')+sph.row('A12','Congested — avoid','#ff6b6b')+sph.row('Tube Line 2','26 min · alternative','#2A9E72')+sph.row('Credit if you switch','£1.40','#2A9E72')+sph.row('Payment','Held in escrow — guaranteed','#2A9E72'),sph.note('The money is already set aside for her. A guarantee, not a promise.')]}},
+      {left:{lbl:'City — 09:30 · Peak closed',items:[sph.lbl('What the budget produced')+sph.row('Verified mode switches','2,840','#2A9E72')+sph.row('Total released on proof','£3,976','#2A9E72')+sph.row('Budget wasted','£0','#2A9E72')+sph.row('Congestion reduction on A12','23%','#2A9E72'),sph.note('Every pound was tied to a verified trip. The budget didn\'t run out — it performed.')]},right:{lbl:'Commuter · Priya K.',items:[sph.lbl('Her proof record')+sph.row('Trips on transit (45 days)','38 of 45')+sph.row('Current credit rate','Standard')+sph.row('Next milestone','50 verified trips')+sph.row('Rate at milestone','Enhanced — +40%','#2A9E72'),sph.note('Consistent behaviour earns better terms automatically. No application, no gatekeeper.')]}},
+    ],
   };
 
   /* ── DEMO RENDER ── */
-  function demoWrap(innerHTML,n,color,label){
+  function demoWrap(innerHTML,n,color,label,tall){
     const dots=Array.from({length:n},(_,i)=>`<button class="demo-dot${i===0?' active':''}" data-i="${i}" style="${i===0?`background:${color};border-color:${color}`:''}"></button>`).join('');
-    return `<div class="demo-wrap"><div class="demo-hdr"><span class="demo-hdr-lbl">${label||'See how it works'}</span><div class="demo-dots">${dots}</div></div><div class="demo-body">${innerHTML}</div>${n>1?`<div class="demo-ftr"><button class="d-prev" disabled>← Back</button><span class="demo-step">1 / ${n}</span><button class="d-next" style="background:${color};border-color:${color}">Next →</button></div>`:''}</div>`;
+    const bStyle=tall?' style="height:380px"':'';
+    return `<div class="demo-wrap"><div class="demo-hdr"><span class="demo-hdr-lbl">${label||'See how it works'}</span><div class="demo-dots">${dots}</div></div><div class="demo-body"${bStyle}>${innerHTML}</div>${n>1?`<div class="demo-ftr"><button class="d-prev" disabled>← Back</button><span class="demo-step">1 / ${n}</span><button class="d-next" style="background:${color};border-color:${color}">Next →</button></div>`:''}</div>`;
   }
 
   function renderPhone(key,color,label){
     const screens=SCREENS[key];
     if(!screens)return '';
     const divs=screens.map((s,i)=>`<div class="demo-screen${i===0?' active':''}" data-s="${i}"><div class="demo-phone-wrap"><div class="demo-phone"><div class="demo-phone-notch"></div><div class="demo-phone-screen">${s}</div></div></div></div>`).join('');
-    return demoWrap(divs,screens.length,color,label);
+    return demoWrap(divs,screens.length,color,label,true);
   }
 
   function renderSplit(key,color,label){
@@ -682,7 +765,7 @@
       if(c){c.innerHTML=renderPhone('individual',C.blue,'See how it works');initDemoNavs(c);}
     } else if(id==='organisation'){
       const c=section.querySelector('#demo-organisation');
-      if(c){c.innerHTML=renderSplit('organisation',C.green,'Follow the journey');initDemoNavs(c);}
+      if(c){c.innerHTML=renderSplit('organisation',C.green,'Benefit, verified, reported');initDemoNavs(c);}
     } else if(id==='neighbourhood'){
       /* Init both sub-demos upfront */
       const cSpace=section.querySelector('#demo-neighbourhood-space');
@@ -706,6 +789,8 @@
       if(cCred){cCred.innerHTML=renderPhone('transition',C.purple,'A credential that travels');initDemoNavs(cCred);}
       const cEnergy=section.querySelector('#demo-city-energy');
       if(cEnergy){cEnergy.innerHTML=renderSplit('energy',C.purple,'Energy and mobility connected');initDemoNavs(cEnergy);}
+      const cCong=section.querySelector('#demo-city-congestion');
+      if(cCong){cCong.innerHTML=renderSplit('congestion',C.purple,'Incentives that pay for results');initDemoNavs(cCong);}
       /* Sub-tab switching */
       section.querySelectorAll('.sub-tab').forEach(tab=>{
         tab.addEventListener('click',e=>{
