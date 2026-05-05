@@ -15,9 +15,9 @@
     /* NAV */
     .nav{position:fixed;top:0;left:0;right:0;z-index:300;height:72px;display:flex;align-items:center;padding:0 48px;background:var(--dark);border-top:3px solid var(--blue);}
     .nav-inner{max-width:var(--max);width:100%;margin:0 auto;display:flex;align-items:center;}
-    .nav-logo img{height:90px;filter:brightness(0) invert(1);}
+    .nav-logo img{height:130px;filter:brightness(0) invert(1);}
     .nav-links{display:flex;gap:28px;margin-left:auto;align-items:center;}
-    .nav-link{font-size:13px;color:rgba(255,255,255,0.5);letter-spacing:0.02em;transition:color 0.15s;}
+    .nav-link{font-size:12px;font-weight:500;color:rgba(255,255,255,0.5);letter-spacing:0.08em;text-transform:uppercase;transition:color 0.15s;}
     .nav-link:hover,.nav-link.active{color:#fff;}
     .btn-nav{border:1px solid rgba(255,255,255,0.28);color:#fff;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:8px 20px;margin-left:16px;transition:background 0.15s,border-color 0.15s;}
     .btn-nav:hover{background:var(--blue);border-color:var(--blue);}
@@ -151,18 +151,18 @@
     .success-check{font-size:40px;color:var(--blue);margin-bottom:10px;}
 
     /* FOOTER */
-    .footer{background:#000;padding:48px 0 28px;}
-    .footer-inner{max-width:var(--max);margin:0 auto;padding:0 48px;display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:36px;}
+    .footer{background:#000;padding:28px 0 16px;}
+    .footer-inner{max-width:var(--max);margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
     .footer-brand{display:flex;flex-direction:column;align-items:flex-start;}
-    .footer-brand p{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-top:10px;margin-bottom:10px;}
+    .footer-brand p{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-top:0;margin-bottom:8px;}
     .footer-partner-logos{display:flex;align-items:center;gap:16px;}
-    .footer-partner-logo{display:block;object-fit:contain;filter:brightness(0) invert(1);opacity:0.28;transition:opacity 0.2s;}
-    .footer-partner-logo:hover{opacity:0.55;}
+    .footer-partner-logo{display:block;object-fit:contain;filter:brightness(0) invert(1);opacity:0.35;transition:opacity 0.2s;}
+    .footer-partner-logo:hover{opacity:0.6;}
     .footer-partner-logo--nfh{height:16px;}.footer-partner-logo--wri{height:22px;}
-    .footer-nav{display:flex;flex-direction:column;gap:10px;align-items:flex-end;}
-    .footer-nav a{font-size:13px;color:rgba(255,255,255,0.25);transition:color 0.15s;}
-    .footer-nav a:hover{color:rgba(255,255,255,0.6);}
-    .footer-bottom{max-width:var(--max);margin:0 auto;padding:18px 48px 0;border-top:1px solid rgba(255,255,255,0.06);font-size:12px;color:rgba(255,255,255,0.15);}
+    .footer-nav{display:flex;flex-direction:row;gap:28px;align-items:center;}
+    .footer-nav a{font-size:12px;color:rgba(255,255,255,0.6);transition:color 0.15s;}
+    .footer-nav a:hover{color:#fff;}
+    .footer-bottom{max-width:var(--max);margin:0 auto;padding:14px 48px 0;border-top:1px solid rgba(255,255,255,0.07);font-size:12px;color:rgba(255,255,255,0.25);}
 
     /* ON THE FABRIC SECTION */
     .fabric-section{background:#050d18;padding:96px 0;border-top:1px solid rgba(0,120,206,0.18);}
@@ -197,8 +197,8 @@
       .uc-content-grid{grid-template-columns:1fr;gap:32px;}
       .partners-inner,.contact-inner{padding:0 24px;}
       .partners-grid,.contact-inner,.form-row{grid-template-columns:1fr;}
-      .footer-inner{padding:0 24px;flex-direction:column;gap:28px;}
-      .footer-nav{align-items:flex-start;}.footer-bottom{padding:18px 24px 0;}
+      .footer-inner{padding:0 24px;flex-direction:column;gap:20px;align-items:flex-start;}
+      .footer-nav{flex-direction:column;gap:10px;align-items:flex-start;}.footer-bottom{padding:14px 24px 0;}
       .demo-split{grid-template-columns:1fr;}
       .fabric-grid{grid-template-columns:1fr;}
       .fabric-inner{padding:0 24px;}
@@ -505,7 +505,6 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <img src="brand_assets/NEWNEWLOGO.png" alt="Urban Web" height="136" style="filter:brightness(0) invert(1);opacity:0.35;margin-left:-22px;">
         <p>A program by</p>
         <div class="footer-partner-logos">
           <a href="https://networksforhumanity.org" target="_blank" rel="noopener"><img src="brand_assets/NFH Logo.png" alt="NFH" class="footer-partner-logo footer-partner-logo--nfh"></a>

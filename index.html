@@ -5,22 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Urban Web — Open Mobility for Cities</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     :root{--blue:#0078CE;--dark:#060f1c;--mid:#0d1e30;--font-display:'Bebas Neue',sans-serif;--font:'Outfit',sans-serif;--max:1200px;}
     body{font-family:var(--font);background:#fff;color:#111;overflow-x:hidden;}
     a{text-decoration:none;color:inherit;}
 
-    .nav{position:fixed;top:0;left:0;right:0;z-index:300;height:68px;display:flex;align-items:center;padding:0 48px;background:var(--dark);border-bottom:1px solid rgba(0,120,206,0.25);}
-    .nav::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--blue);}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:300;height:72px;display:flex;align-items:center;padding:0 48px;background:var(--dark);border-top:3px solid var(--blue);}
     .nav-inner{max-width:var(--max);width:100%;margin:0 auto;display:flex;align-items:center;}
-    .nav-logo img{height:86px;filter:brightness(0) invert(1);}
-    .nav-links{display:flex;gap:32px;margin-left:auto;align-items:center;}
-    .nav-link{font-size:12px;font-weight:500;color:rgba(255,255,255,0.45);letter-spacing:0.08em;text-transform:uppercase;transition:color 0.15s;}
+    .nav-logo img{height:130px;filter:brightness(0) invert(1);}
+    .nav-links{display:flex;gap:28px;margin-left:auto;align-items:center;}
+    .nav-link{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:rgba(255,255,255,0.5);letter-spacing:0.08em;text-transform:uppercase;transition:color 0.15s;}
     .nav-link:hover,.nav-link.active{color:#fff;}
-    .btn-nav{border:1px solid rgba(0,120,206,0.5);color:rgba(255,255,255,0.85);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:8px 22px;margin-left:20px;transition:all 0.15s;}
-    .btn-nav:hover{background:var(--blue);border-color:var(--blue);color:#fff;}
+    .btn-nav{font-family:'DM Sans',sans-serif;border:1px solid rgba(255,255,255,0.28);color:#fff;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:8px 20px;margin-left:16px;transition:background 0.15s,border-color 0.15s;}
+    .btn-nav:hover{background:var(--blue);border-color:var(--blue);}
 
     .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;padding-top:68px;overflow:hidden;}
     .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.22;}
@@ -59,11 +58,12 @@
     .prec-header{max-width:var(--max);margin:0 auto;padding:100px 48px 56px;border-bottom:1px solid rgba(255,255,255,0.05);}
     .prec-header h2{font-family:var(--font-display);font-size:clamp(56px,7.5vw,108px);line-height:0.88;color:#fff;text-transform:uppercase;max-width:640px;margin-bottom:18px;letter-spacing:0.02em;}
     .prec-header p{font-size:17px;font-weight:300;color:rgba(255,255,255,0.42);max-width:400px;line-height:1.65;}
-    .prec-row{display:grid;grid-template-columns:80px 1fr 1.4fr auto;gap:40px;align-items:start;max-width:var(--max);margin:0 auto;padding:48px 48px;border-bottom:1px solid rgba(255,255,255,0.05);transition:background 0.2s,opacity 0.2s;}
-    .prec-rows:hover .prec-row{opacity:0.32;}
-    .prec-rows:hover .prec-row:hover{opacity:1;background:rgba(255,255,255,0.012);}
-    .prec-num{font-family:var(--font-display);font-size:56px;line-height:1;color:rgba(255,255,255,0.06);padding-top:2px;letter-spacing:0.02em;}
-    .prec-name{font-family:var(--font-display);font-size:38px;line-height:1;color:#fff;text-transform:uppercase;padding-top:5px;letter-spacing:0.02em;}
+    .prec-row{display:grid;grid-template-columns:80px 1fr 1.4fr auto;gap:40px;align-items:start;max-width:var(--max);margin:0 auto;padding:48px 48px;border-bottom:1px solid rgba(255,255,255,0.05);transition:background 0.25s;}
+    .prec-rows:hover .prec-row:hover{background:rgba(0,120,206,0.04);}
+    .prec-rows:hover .prec-row:hover .prec-name{color:var(--blue);}
+    .prec-rows:hover .prec-row:hover .prec-num{color:rgba(0,120,206,0.5);}
+    .prec-num{font-family:var(--font-display);font-size:56px;line-height:1;color:rgba(255,255,255,0.2);padding-top:2px;letter-spacing:0.02em;transition:color 0.25s;}
+    .prec-name{font-family:var(--font-display);font-size:38px;line-height:1;color:#fff;text-transform:uppercase;padding-top:5px;letter-spacing:0.02em;transition:color 0.25s;}
     .prec-body{font-size:14px;font-weight:300;color:rgba(255,255,255,0.45);line-height:1.8;padding-top:4px;}
     .prec-tag{font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);border:1px solid rgba(0,120,206,0.45);padding:6px 14px;white-space:nowrap;align-self:start;margin-top:6px;}
     .prec-conclusion{max-width:var(--max);margin:0 auto;padding:100px 48px;}
@@ -97,18 +97,18 @@
     .form-success{display:none;color:#fff;padding:40px 0;}
     .success-check{font-size:36px;color:var(--blue);margin-bottom:10px;}
 
-    .footer{background:#000;padding:48px 0 28px;}
-    .footer-inner{max-width:var(--max);margin:0 auto;padding:0 48px;display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:36px;}
+    .footer{background:#000;padding:28px 0 16px;}
+    .footer-inner{max-width:var(--max);margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
     .footer-brand{display:flex;flex-direction:column;align-items:flex-start;}
-    .footer-brand p{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-top:10px;margin-bottom:10px;}
+    .footer-brand p{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-top:0;margin-bottom:8px;}
     .footer-partner-logos{display:flex;align-items:center;gap:16px;}
-    .footer-partner-logo{display:block;object-fit:contain;filter:brightness(0) invert(1);opacity:0.25;transition:opacity 0.2s;}
-    .footer-partner-logo:hover{opacity:0.5;}
+    .footer-partner-logo{display:block;object-fit:contain;filter:brightness(0) invert(1);opacity:0.35;transition:opacity 0.2s;}
+    .footer-partner-logo:hover{opacity:0.6;}
     .footer-partner-logo--nfh{height:15px;} .footer-partner-logo--wri{height:21px;}
-    .footer-nav{display:flex;flex-direction:column;gap:10px;align-items:flex-end;}
-    .footer-nav a{font-size:12px;font-weight:400;color:rgba(255,255,255,0.22);transition:color 0.15s;}
-    .footer-nav a:hover{color:rgba(255,255,255,0.58);}
-    .footer-bottom{max-width:var(--max);margin:0 auto;padding:18px 48px 0;border-top:1px solid rgba(255,255,255,0.05);font-size:11px;color:rgba(255,255,255,0.14);}
+    .footer-nav{display:flex;flex-direction:row;gap:28px;align-items:center;}
+    .footer-nav a{font-size:12px;font-weight:400;color:rgba(255,255,255,0.6);transition:color 0.15s;}
+    .footer-nav a:hover{color:#fff;}
+    .footer-bottom{max-width:var(--max);margin:0 auto;padding:14px 48px 0;border-top:1px solid rgba(255,255,255,0.07);font-size:11px;color:rgba(255,255,255,0.25);}
 
     @media(max-width:900px){
       .nav{padding:0 24px;}.nav-links{display:none;}
@@ -121,7 +121,7 @@
       .partners-inner,.contact-inner{padding:0 24px;}
       .partners-grid,.contact-inner{grid-template-columns:1fr;gap:40px;}
       .form-row{grid-template-columns:1fr;}
-      .footer-inner{padding:0 24px;flex-direction:column;gap:28px;}.footer-nav{align-items:flex-start;}.footer-bottom{padding:18px 24px 0;}
+      .footer-inner{padding:0 24px;flex-direction:column;gap:20px;align-items:flex-start;}.footer-nav{flex-direction:column;gap:10px;align-items:flex-start;}.footer-bottom{padding:14px 24px 0;}
     }
   </style>
 </head>
@@ -281,7 +281,6 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <img src="brand_assets/NEWNEWLOGO.png" alt="Urban Web" height="130" style="filter:brightness(0) invert(1);opacity:0.3;margin-left:-22px;">
         <p>A program by</p>
         <div class="footer-partner-logos">
           <a href="https://networksforhumanity.org" target="_blank" rel="noopener"><img src="brand_assets/NFH Logo.png" alt="Networks for Humanity" class="footer-partner-logo footer-partner-logo--nfh"></a>
