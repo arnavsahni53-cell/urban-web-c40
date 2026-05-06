@@ -34,13 +34,6 @@
     .btn-ghost{color:rgba(255,255,255,0.55);font-size:13px;font-weight:400;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:2px;transition:color 0.15s,border-color 0.15s;}
     .btn-ghost:hover{color:#fff;border-color:#fff;}
 
-    .stats{background:var(--blue);padding:52px 0;}
-    .stats-inner{max-width:var(--max);margin:0 auto;padding:0 48px;display:grid;grid-template-columns:repeat(3,1fr);}
-    .stat{padding:0 48px;border-right:1px solid rgba(255,255,255,0.18);}
-    .stat:first-child{padding-left:0;}
-    .stat:last-child{border-right:none;}
-    .stat-num{font-family:var(--font-display);font-size:96px;line-height:1;color:#fff;margin-bottom:6px;letter-spacing:0.02em;}
-    .stat-label{font-size:11px;font-weight:400;color:rgba(255,255,255,0.65);letter-spacing:0.1em;text-transform:uppercase;}
 
     .challenge{background:var(--dark);padding:112px 0;}
     .challenge-inner{max-width:var(--max);margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
@@ -113,8 +106,6 @@
     @media(max-width:900px){
       .nav{padding:0 24px;}.nav-links{display:none;}
       .hero-content{padding:56px 24px;}
-      .stats{padding:36px 24px;}.stats-inner{grid-template-columns:1fr;gap:24px;padding:0 24px;}
-      .stat{padding:0;border-right:none;}
       .challenge{padding:64px 0;}.challenge-inner{grid-template-columns:1fr;gap:40px;padding:0 24px;}
       .prec-header{padding:64px 24px 40px;}.prec-row{grid-template-columns:1fr;gap:10px;padding:36px 24px;}.prec-num{display:none;}
       .prec-conclusion{padding:64px 24px;}
@@ -156,23 +147,6 @@
       </div>
     </div>
   </section>
-
-  <div class="stats">
-    <div class="stats-inner">
-      <div class="stat">
-        <div class="stat-num">1</div>
-        <div class="stat-label">Connection to reach every service</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">0</div>
-        <div class="stat-label">Bilateral agreements required</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">∞</div>
-        <div class="stat-label">Possibilities</div>
-      </div>
-    </div>
-  </div>
 
   <section class="challenge" id="challenge">
     <div class="challenge-inner">
