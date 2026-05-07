@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Use Cases — Urban Web</title>
+  <link rel="icon" type="image/svg+xml" href="brand_assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     :root{--blue:#0078CE;--dark:#07111e;--font-display:'Barlow Condensed',sans-serif;--font:'DM Sans',sans-serif;--max:1200px;}
@@ -15,7 +16,7 @@
     /* NAV */
     .nav{position:fixed;top:0;left:0;right:0;z-index:300;height:72px;display:flex;align-items:center;padding:0 48px;background:var(--dark);border-top:3px solid var(--blue);}
     .nav-inner{max-width:var(--max);width:100%;margin:0 auto;display:flex;align-items:center;}
-    .nav-logo img{height:130px;filter:brightness(0) invert(1);}
+    .nav-logo img{height:130px;filter:brightness(0) invert(1);}.nav-logo svg{height:48px;}
     .nav-links{display:flex;gap:28px;margin-left:auto;align-items:center;}
     .nav-link{font-size:12px;font-weight:500;color:rgba(255,255,255,0.5);letter-spacing:0.08em;text-transform:uppercase;transition:color 0.15s;}
     .nav-link:hover,.nav-link.active{color:#fff;}
@@ -225,7 +226,27 @@
 
   <nav class="nav">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo"><img src="brand_assets/NEWNEWLOGO.png" alt="Urban Web"></a>
+      <a href="index.html" class="nav-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 370 116" aria-label="Urban Web">
+            <polygon points="57,12 96.8,35 96.8,81 57,104 17.2,81 17.2,35" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="1.7"/>
+            <line x1="57" y1="58" x2="57"   y2="12"  stroke="#0078CE" stroke-width="1.9"/>
+            <line x1="57" y1="58" x2="57"   y2="104" stroke="#0078CE" stroke-width="1.9"/>
+            <line x1="57" y1="58" x2="96.8" y2="35"  stroke="rgba(255,255,255,0.75)" stroke-width="1.7"/>
+            <line x1="57" y1="58" x2="96.8" y2="81"  stroke="rgba(255,255,255,0.75)" stroke-width="1.7"/>
+            <line x1="57" y1="58" x2="17.2" y2="81"  stroke="rgba(255,255,255,0.75)" stroke-width="1.7"/>
+            <line x1="57" y1="58" x2="17.2" y2="35"  stroke="rgba(255,255,255,0.75)" stroke-width="1.7"/>
+            <circle cx="57"   cy="12"  r="4.8" fill="#0078CE"/>
+            <circle cx="96.8" cy="35"  r="4.8" fill="#0078CE"/>
+            <circle cx="57"   cy="104" r="4.8" fill="#0078CE"/>
+            <circle cx="96.8" cy="81"  r="4.8" fill="rgba(255,255,255,0.85)"/>
+            <circle cx="17.2" cy="81"  r="4.8" fill="rgba(255,255,255,0.85)"/>
+            <circle cx="17.2" cy="35"  r="4.8" fill="rgba(255,255,255,0.85)"/>
+            <circle cx="57"   cy="58"  r="5.8" fill="rgba(255,255,255,0.9)"/>
+            <text x="114" y="60"  font-family="Outfit,sans-serif" font-weight="700" font-size="46" fill="white">URBAN</text>
+            <text x="114" y="100" font-family="Outfit,sans-serif" font-weight="700" font-size="46" fill="white">WEB</text>
+            <text x="116" y="112" font-family="Outfit,sans-serif" font-weight="400" font-size="10.5" fill="#0078CE" letter-spacing="2.5">OPEN MOBILITY NETWORK</text>
+          </svg>
+        </a>
       <div class="nav-links">
         <a href="index.html" class="nav-link">Home</a>
         <a href="urban-web-c40-preview.html" class="nav-link">What is Urban Web</a>

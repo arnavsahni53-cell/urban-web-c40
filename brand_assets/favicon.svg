@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .c { fill: #060f1c; }
+    .l { stroke: #060f1c; fill: none; }
+    @media (prefers-color-scheme: dark) {
+      .c { fill: rgba(255,255,255,0.9); }
+      .l { stroke: rgba(255,255,255,0.85); fill: none; }
+    }
+  </style>
+  <polygon points="16,5 25.5,10.5 25.5,21.5 16,27 6.5,21.5 6.5,10.5"
+    class="l" stroke-width="1.1"/>
+  <line x1="16" y1="16" x2="16"   y2="5"    stroke="#0078CE" stroke-width="1.2"/>
+  <line x1="16" y1="16" x2="16"   y2="27"   stroke="#0078CE" stroke-width="1.2"/>
+  <line x1="16" y1="16" x2="25.5" y2="10.5" class="l" stroke-width="1.1"/>
+  <line x1="16" y1="16" x2="25.5" y2="21.5" class="l" stroke-width="1.1"/>
+  <line x1="16" y1="16" x2="6.5"  y2="21.5" class="l" stroke-width="1.1"/>
+  <line x1="16" y1="16" x2="6.5"  y2="10.5" class="l" stroke-width="1.1"/>
+  <circle cx="16"   cy="5"    r="2"   fill="#0078CE"/>
+  <circle cx="25.5" cy="10.5" r="2"   fill="#0078CE"/>
+  <circle cx="16"   cy="27"   r="2"   fill="#0078CE"/>
+  <circle cx="25.5" cy="21.5" r="2"   class="c"/>
+  <circle cx="6.5"  cy="21.5" r="2"   class="c"/>
+  <circle cx="6.5"  cy="10.5" r="2"   class="c"/>
+  <circle cx="16"   cy="16"   r="2.5" class="c"/>
+</svg>

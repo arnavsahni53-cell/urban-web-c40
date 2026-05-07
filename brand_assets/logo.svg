@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 370 116">
+  <!-- Hexagonal icon: center(57,58), radius 46 -->
+  <polygon points="57,12 96.8,35 96.8,81 57,104 17.2,81 17.2,35" fill="none" stroke="rgba(6,15,28,0.7)" stroke-width="1.7"/>
+  <line x1="57" y1="58" x2="57"   y2="12"  stroke="#0078CE" stroke-width="1.9"/>
+  <line x1="57" y1="58" x2="57"   y2="104" stroke="#0078CE" stroke-width="1.9"/>
+  <line x1="57" y1="58" x2="96.8" y2="35"  stroke="rgba(6,15,28,0.7)" stroke-width="1.7"/>
+  <line x1="57" y1="58" x2="96.8" y2="81"  stroke="rgba(6,15,28,0.7)" stroke-width="1.7"/>
+  <line x1="57" y1="58" x2="17.2" y2="81"  stroke="rgba(6,15,28,0.7)" stroke-width="1.7"/>
+  <line x1="57" y1="58" x2="17.2" y2="35"  stroke="rgba(6,15,28,0.7)" stroke-width="1.7"/>
+  <circle cx="57"   cy="12"  r="4.8" fill="#0078CE"/>
+  <circle cx="96.8" cy="35"  r="4.8" fill="#0078CE"/>
+  <circle cx="57"   cy="104" r="4.8" fill="#0078CE"/>
+  <circle cx="96.8" cy="81"  r="4.8" fill="rgba(6,15,28,0.8)"/>
+  <circle cx="17.2" cy="81"  r="4.8" fill="rgba(6,15,28,0.8)"/>
+  <circle cx="17.2" cy="35"  r="4.8" fill="rgba(6,15,28,0.8)"/>
+  <circle cx="57"   cy="58"  r="5.8" fill="rgba(6,15,28,0.9)"/>
+  <!-- Text -->
+  <text x="114" y="60"  font-family="Outfit,Helvetica,Arial,sans-serif" font-weight="700" font-size="46" fill="#060f1c">URBAN</text>
+  <text x="114" y="100" font-family="Outfit,Helvetica,Arial,sans-serif" font-weight="700" font-size="46" fill="#060f1c">WEB</text>
+  <text x="116" y="112" font-family="Outfit,Helvetica,Arial,sans-serif" font-weight="400" font-size="10.5" fill="#0078CE" letter-spacing="2.5">OPEN MOBILITY NETWORK</text>
+</svg>
